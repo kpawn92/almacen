@@ -12,7 +12,8 @@
                 <div class="text-md-end footer-links d-none d-md-block">
                     <a href="javascript: void(0);">About</a>
                     <a href="javascript: void(0);">Support</a>
-                    <a href="javascript: void(0);">Contact Us</a>                    
+                    <a href="javascript: void(0);">Contact Us</a>    
+                    <!-- boton de ir arriba -->                
                     <a href="#content_principal" class="btn btn-light btn-rounded btn-sm"><i class="uil-top-arrow-to-top "></i></a>
                 </div>
             </div>
