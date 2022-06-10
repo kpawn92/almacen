@@ -50,10 +50,6 @@
                                     <label class="form-label" for="precio">Precio:</label>
                                     <input type="text" class="form-control" id="precio" name="precio" placeholder="Entre el precio">
                                 </div>
-                                <div class="mb-3">
-                                    <label for="imagen" class="form-label">Portada del libro:</label>
-                                    <input type="text" id="imagen" name="portada" class="form-control" placeholder="Subir la imagen">
-                                </div>
                             </div>
                             <div class="col-6">
                                 <div class="mb-3">
@@ -66,7 +62,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="cantidad">Cantidad en existencia:</label>
-                                    <input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="Entre la cantidad">
+                                    <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Entre la cantidad">
                                 </div>
                             </div>
                         </div>
@@ -77,9 +73,5 @@
             </div>
         </div>
     </div>
-    <form action="<?php echo base_url('/save_book'); ?>" method="post">
-    <input type="text" value="Hola">
-    <input type="submit" value="enviar">
-    </form>
     <?= $this->include('pages/dependencias/books'); ?>
 </div>

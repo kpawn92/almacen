@@ -127,8 +127,8 @@ class Dash extends Controller
             if ($rows_report->getNumRows() > 0) {
                 echo "El libro ya existe";
             } else {
-                $book->guardar($codigo, $titulo, $precio, $autor, $isbn, $cantidad, $portada);
-                echo "guadado";
+                $book->guardar($codigo, $titulo, $precio, $autor, $isbn, $cantidad);
+                echo "<strong>Datos guardados correctamente...</strong>";
             }
         }
     }

@@ -8,7 +8,7 @@ class M_book extends Model{
     // Uncomment below if you want add primary key
     protected $primaryKey = 'id';
 
-    function guardar($codigo, $titulo, $precio, $autor, $isbn, $cantidad, $portada)
+    function guardar($codigo, $titulo, $precio, $autor, $isbn, $cantidad)
     {
         $db = \Config\Database::connect();
         $builder = $db->table('tb_libro');
@@ -18,8 +18,7 @@ class M_book extends Model{
             'precio' => $precio,
             'autor' => $autor,
             'isbn' => $isbn,
-            'cantidad' => $cantidad,
-            'portada' => $portada
+            'cantidad' => $cantidad
         ];
         return $builder->insert($data);
     }
