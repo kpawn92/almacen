@@ -1,1 +1,2 @@
 Sistema informático para el control en el almacén de libros de la Universidad de Ciencias Médicas de Granma
+Gestionar los estudiantes matriculados, libros existentes, prestamos de libros y ventas de libros.
