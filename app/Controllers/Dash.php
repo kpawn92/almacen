@@ -172,4 +172,16 @@ class Dash extends Controller
             } else echo "<strong>Datos actualizados correctamente...</strong>";
         }
     }
+
+    public function del_book()
+    {
+        $request = \Config\Services::request();
+        $book = new M_book();
+        extract($request->getPost());
+        $query1 = $book->del_book($id_libro);
+        if ($query1 != true) {
+            echo "El libro tiene registros pendientes";
+        } else
+            echo "El libro ha sido eliminado exitosamente";
+    }
 }

@@ -52,7 +52,7 @@
                 },
                 {
                     "defaultContent": `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="dripicons-document-edit"></i></button>
-                                       <button type="button" class="del-student btn btn-danger"><i class="dripicons-trash"></i></button>`
+                                       <button type="button" class="del-book btn btn-danger"><i class="dripicons-trash"></i></button>`
                 }
             ],
             "language": {
@@ -73,43 +73,42 @@
             $("#eisbn").val(data2.isbn);
             $("#ecantidad").val(data2.cantidad);
 
-            /*$(".del-student").on("click", function() {
-                var id = data.id;
+            $(".del-book").on("click", function() {
+                var id_libro = data2.id_book;
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: 'Seguro?',
+                    text: "Se eliminaran todos los datos del libro",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Si, borrarlo!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        borrarEstudiante(id);
+                        borrarLibro(id_libro);
                         Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
+                            'Borrado!',
+                            'Se completo el borrado del registro.',
                             'success'
                         );
-                        table.ajax.reload();
                         console.log('eliminado');
                     }
                 })
-                console.log(id);
             });
 
-            function borrarEstudiante(id) {
+            function borrarLibro(id_libro) {
                 console.log("funcion");
                 $.ajax({
-                    url: '<?php //echo base_url('/del_student'); 
-                            ?>',
+                    url: '<?php echo base_url('/del_book'); ?>',
                     type: 'POST',
                     data: {
-                        id: id
+                        id_libro: id_libro
                     }
                 });
-            }*/
+            }
         });
+
+        /* Metodo para editar libros */
 
         $("#edit_book").click(function() {
             $.ajax({
@@ -127,5 +126,28 @@
                 }, 4000);
             });
         });
+
+        /* Actualizar la tabla-libros */
+        $("#btn-update-book").on('click', function() {
+            tableBooks.ajax.reload();
+            var dataBook = tableBooks.row().data();
+            ocultarDivTable(dataBook);
+        });
+
+        $("#btn-listbooks").on('click', function() {
+            tableBooks.ajax.reload();
+            var dataBook = tableBooks.row().data();
+            ocultarDivTable(dataBook);
+        })
+
+        function ocultarDivTable(dataBook) {
+            var divDatatableBook = document.getElementById("dataTable-book");
+            if (dataBook == undefined) {
+                divDatatableBook.style.display = "none";
+                //console.log("bien");
+            } else {
+                divDatatableBook.style.display = "contents";
+            }
+        }
     });
 </script>

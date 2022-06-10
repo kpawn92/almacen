@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="tab-content">
-                    <form action="" id="form-edit-book">
+                    <form action="" id="form2">
                         <div class="row">
                             <div class="col-6">
                                 <div class="mb-3">
@@ -68,12 +68,12 @@
                         </div>
                 </div>
                 <button class="btn btn-warning" type="button" id="sub_l">Enviar form</button>
-                <a class="btn btn-primary" href="#dow-book" id="btn-listBook">Mostrar Listado <i class="uil-angle-double-down"></i></a>
+                <a class="btn btn-primary" href="#dow-book" id="btn-listbooks">Mostrar Listado <i class="uil-angle-double-down"></i></a>
                 </form>
             </div>
         </div>
     </div>
-    <div class="row" id="dataTable-student" style="display: contents;">
+    <div class="row" id="dataTable-book" style="display: none;">
         <div class="col-12">
             <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
                 <div class="row">

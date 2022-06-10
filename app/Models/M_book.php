@@ -52,4 +52,12 @@ class M_book extends Model{
         $builder->where('id', $id);        
         return $builder->update($data);
     }
+
+    function del_book($id_libro)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('tb_libro');       
+        $builder->where('id', $id_libro);
+        return $builder->delete();
+    }
 }
