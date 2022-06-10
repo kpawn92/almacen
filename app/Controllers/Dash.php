@@ -8,6 +8,7 @@ use App\Models\M_carrera;
 use App\Models\M_yearA;
 use App\Models\M_brigada;
 use App\Models\M_student;
+use App\Models\M_book;
 
 class Dash extends Controller
 {
@@ -67,7 +68,7 @@ class Dash extends Controller
             extract($request->getPost());
             $student = new M_student();
             $act = $student->update_student($id, $nombre, $lastname, $ci, $direccion, $fk_municipio, $fk_carrera, $fk_year_academico, $fk_brigada);
-            if ($act==false) {
+            if ($act == false) {
                 echo "Error de actualizaci&oacute;n";
             } else echo "<strong>Datos actualizados correctamente...</strong>";
         }
@@ -98,6 +99,37 @@ class Dash extends Controller
             }
             $jsonstring = json_encode($json);
             echo $jsonstring;
+        }
+    }
+
+    public function save_book()
+    {
+        //echo "preparando el guardar libro";
+        $request = \Config\Services::request();        
+
+        $validation = $this->validate([
+            'codigo' => 'required',
+            'titulo' => 'required',
+            'precio' => 'required',
+            'autor' => 'required',
+            'isbn' => 'required',
+            'cantidad' => 'required'
+        ]);
+
+        if (!$validation) {
+            $confirmBook  = $this->validator;
+            return $confirmBook->listErrors();
+        } else {
+            extract($request->getPost());            
+            
+            $book = new M_book();
+            $rows_report = $book->row_preport($codigo);
+            if ($rows_report->getNumRows() > 0) {
+                echo "El libro ya existe";
+            } else {
+                $book->guardar($codigo, $titulo, $precio, $autor, $isbn, $cantidad, $portada);
+                echo "guadado";
+            }
         }
     }
 }

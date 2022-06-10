@@ -30,7 +30,7 @@
                     <div class="col-6">
                         <div class="alert alert-primary" role="alert" id="alert3" style="display: none">
                             <i class="dripicons-information me-2"></i>
-                            <p id="resp"></p>
+                            <p id="resp-book"></p>
                         </div>
                     </div>
                 </div>
@@ -39,54 +39,47 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="nombre">Nombre(s)</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre o nombres">
+                                    <label class="form-label" for="codigo">C&oacute;digo:</label>
+                                    <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Entre el c&oacute;digo">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="lastname">Apellidos</label>
-                                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Apellidos">
+                                    <label class="form-label" for="titulo">T&iacute;tulo:</label>
+                                    <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Entre el titulo">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="ci">CI</label>
-                                    <input type="text" class="form-control" data-toggle="input-mask" data-mask-format="00000000000" id="ci" name="ci">
-                                    <span class="font-13 text-muted">Ej. "921015xxx81"</span>
+                                    <label class="form-label" for="precio">Precio:</label>
+                                    <input type="text" class="form-control" id="precio" name="precio" placeholder="Entre el precio">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Textareas</label>
-                                    <p class="text-muted font-13">
-                                        Direcci&oacute;n particular
-                                    </p>
-                                    <textarea data-toggle="maxlength" class="form-control" maxlength="225" rows="2" placeholder="Esta área de texto tiene un límite de 225 caracteres." name="direccion"></textarea>
+                                    <label for="imagen" class="form-label">Portada del libro:</label>
+                                    <input type="text" id="imagen" name="portada" class="form-control" placeholder="Subir la imagen">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="nombre">Nombre(s)</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre o nombres">
+                                    <label class="form-label" for="autor">Autor:</label>
+                                    <input type="text" class="form-control" id="autor" name="autor" placeholder="Entre el autor">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="lastname">Apellidos</label>
-                                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Apellidos">
+                                    <label class="form-label" for="isbn">ISBN:</label>
+                                    <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Entre el isbn">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="ci">CI</label>
-                                    <input type="text" class="form-control" data-toggle="input-mask" data-mask-format="00000000000" id="ci" name="ci">
-                                    <span class="font-13 text-muted">Ej. "921015xxx81"</span>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Textareas</label>
-                                    <p class="text-muted font-13">
-                                        Direcci&oacute;n particular
-                                    </p>
-                                    <textarea data-toggle="maxlength" class="form-control" maxlength="225" rows="2" placeholder="Esta área de texto tiene un límite de 225 caracteres." name="direccion"></textarea>
+                                    <label class="form-label" for="cantidad">Cantidad en existencia:</label>
+                                    <input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="Entre la cantidad">
                                 </div>
                             </div>
                         </div>
                 </div>
                 <button class="btn btn-warning" type="button" id="sub_l">Enviar form</button>
-                <a class="btn btn-primary" href="#dow-student" id="btn-listBook">Mostrar Listado <i class="uil-angle-double-down"></i></a>
+                <a class="btn btn-primary" href="#dow-book" id="btn-listBook">Mostrar Listado <i class="uil-angle-double-down"></i></a>
                 </form>
             </div>
         </div>
     </div>
+    <form action="<?php echo base_url('/save_book'); ?>" method="post">
+    <input type="text" value="Hola">
+    <input type="submit" value="enviar">
+    </form>
+    <?= $this->include('pages/dependencias/books'); ?>
 </div>
