@@ -11,7 +11,7 @@
  Target Server Version : 100419
  File Encoding         : 65001
 
- Date: 09/06/2022 13:32:20
+ Date: 10/06/2022 14:07:16
 */
 
 SET NAMES utf8mb4;
@@ -135,11 +135,13 @@ CREATE TABLE `tb_libro`  (
   `isbn` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `cantidad` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tb_libro
 -- ----------------------------
+INSERT INTO `tb_libro` VALUES (9, 'sdasd', 'sdasd', 'asdasd', 'asda', 'sdasd', 123);
+INSERT INTO `tb_libro` VALUES (10, 'asade', 'sdasd', 'asdasd', 'asda', 'sdasd', 123);
 
 -- ----------------------------
 -- Table structure for tb_municipio
