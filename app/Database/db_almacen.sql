@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : Farmram
+ Source Server         : FarmaRAM
  Source Server Type    : MySQL
  Source Server Version : 100419
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 100419
  File Encoding         : 65001
 
- Date: 10/06/2022 14:07:16
+ Date: 10/06/2022 15:52:59
 */
 
 SET NAMES utf8mb4;
@@ -120,7 +120,7 @@ CREATE TABLE `tb_estudiante`  (
 -- Records of tb_estudiante
 -- ----------------------------
 INSERT INTO `tb_estudiante` VALUES (83, '34234234234', 'dasdad', 'asdasda', 'sdasdasdas', 1, 1, 1, 1, 0);
-INSERT INTO `tb_estudiante` VALUES (84, '44234234222', 'dasdad', 'asdasda', 'sdasdasdas', 1, 1, 1, 1, 0);
+INSERT INTO `tb_estudiante` VALUES (84, '44234234222', 'Juan Carlos', 'asdasda', 'sdasdasdas', 1, 1, 1, 1, 0);
 
 -- ----------------------------
 -- Table structure for tb_libro
@@ -135,13 +135,14 @@ CREATE TABLE `tb_libro`  (
   `isbn` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `cantidad` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tb_libro
 -- ----------------------------
-INSERT INTO `tb_libro` VALUES (9, 'sdasd', 'sdasd', 'asdasd', 'asda', 'sdasd', 123);
-INSERT INTO `tb_libro` VALUES (10, 'asade', 'sdasd', 'asdasd', 'asda', 'sdasd', 123);
+INSERT INTO `tb_libro` VALUES (9, 'pyton', 'sdasd', 'asdasd', 'asda', 'sdasd', 123);
+INSERT INTO `tb_libro` VALUES (10, 'awq48', 'dd', '120.36', 'asda', 'sdasd', 123);
+INSERT INTO `tb_libro` VALUES (11, 'php', 'dasda', '12.3', 'sada', '121', 12);
 
 -- ----------------------------
 -- Table structure for tb_municipio
