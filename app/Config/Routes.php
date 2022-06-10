@@ -44,6 +44,7 @@ $routes->post('save_student', 'Dash::save_student');
 $routes->post('list_student', 'Dash::list_student');
 $routes->post('edit_student', 'Dash::edit_student');
 $routes->post('del_student', 'Dash::del_student');
+$routes->post('save_book', 'Dash::save_book');
 
 /*
  * --------------------------------------------------------------------
