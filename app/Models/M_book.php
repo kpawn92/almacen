@@ -29,4 +29,27 @@ class M_book extends Model{
         $query = $db->query("SELECT * FROM tb_libro WHERE codigo = '$codigo'");
         return $query;
     }
+
+    function list_book()
+    {
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT id as id_book, codigo, titulo, precio, autor, isbn, cantidad FROM tb_libro");
+        return $query->getResultArray();
+    }
+
+    function update_book($id, $codigo, $titulo, $precio, $autor, $isbn, $cantidad)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('tb_libro');
+        $data = [
+            'codigo' => $codigo,
+            'titulo' => $titulo,
+            'precio' => $precio,
+            'autor' => $autor,
+            'isbn' => $isbn,
+            'cantidad' => $cantidad        
+        ];
+        $builder->where('id', $id);        
+        return $builder->update($data);
+    }
 }

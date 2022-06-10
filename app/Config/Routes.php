@@ -31,7 +31,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-/* Routes */
+
 $routes->get('/', 'Home::index');
 $routes->get('index', 'Dash::index');
 $routes->get('dash', 'Dash::dash');
@@ -45,6 +45,8 @@ $routes->post('list_student', 'Dash::list_student');
 $routes->post('edit_student', 'Dash::edit_student');
 $routes->post('del_student', 'Dash::del_student');
 $routes->post('save_book', 'Dash::save_book');
+$routes->post('list_book', 'Dash::list_book');
+$routes->post('edit_book', 'Dash::edit_book');
 
 /*
  * --------------------------------------------------------------------

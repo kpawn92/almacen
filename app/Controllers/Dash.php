@@ -105,7 +105,7 @@ class Dash extends Controller
     public function save_book()
     {
         //echo "preparando el guardar libro";
-        $request = \Config\Services::request();        
+        $request = \Config\Services::request();
 
         $validation = $this->validate([
             'codigo' => 'required',
@@ -120,8 +120,8 @@ class Dash extends Controller
             $confirmBook  = $this->validator;
             return $confirmBook->listErrors();
         } else {
-            extract($request->getPost());            
-            
+            extract($request->getPost());
+
             $book = new M_book();
             $rows_report = $book->row_preport($codigo);
             if ($rows_report->getNumRows() > 0) {
@@ -130,6 +130,46 @@ class Dash extends Controller
                 $book->guardar($codigo, $titulo, $precio, $autor, $isbn, $cantidad);
                 echo "<strong>Datos guardados correctamente...</strong>";
             }
+        }
+    }
+
+    public function list_book()
+    {
+        $libros = new M_book();
+        if ($_POST['accion'] == "listarLibro") {
+            $json = array();
+            $book = $libros->list_book();
+
+            foreach ($book as $data) {
+                $json['data'][] = $data;
+            }
+            $jsonstring = json_encode($json);
+            echo $jsonstring;
+        }
+    }
+
+    public function edit_book()
+    {
+        $request = \Config\Services::request();
+        $validation = $this->validate([
+            'codigo' => 'required',
+            'titulo' => 'required',
+            'precio' => 'required',
+            'autor' => 'required',
+            'isbn' => 'required',
+            'cantidad' => 'required'
+        ]);
+
+        if (!$validation) {
+            $confirmBook  = $this->validator;
+            return $confirmBook->listErrors();
+        } else {
+            extract($request->getPost());
+            $book = new M_book();
+            $act = $book->update_book($id, $codigo, $titulo, $precio, $autor, $isbn, $cantidad);
+            if ($act == false) {
+                echo "Error de actualizaci&oacute;n";
+            } else echo "<strong>Datos actualizados correctamente...</strong>";
         }
     }
 }
