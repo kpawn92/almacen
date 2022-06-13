@@ -15,9 +15,7 @@
     </div>
     <!-- end page title -->
     <div class="row shadow-lg p-3 mb-5 mt-4 bg-body rounded">
-        <div class="row">
-            <h4 class="header-title">Mostrar CI<button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="mdi mdi-autorenew"></i><i class="mdi mdi-autorenew"></i></button></h4>
-        </div>
+        <h4 class="header-title"><button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="mdi mdi-autorenew"></i></button><button class="btn btn-primary ms-2" id="btn-upBuscar"><i class="uil-search-alt"></i></button></h4>
         <div class="mb-3 col-md-3 col-sm-12">
             <!-- Single Select -->
             <select class="form-control select2" data-toggle="select2" id="selectCI">
