@@ -15,23 +15,43 @@
     </div>
     <!-- end page title -->
     <div class="row shadow-lg p-3 mb-5 mt-4 bg-body rounded">
-        <div class="mb-3 col-3">
+        <div class="row">
+            <h4 class="header-title">Mostrar CI<button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="mdi mdi-autorenew"></i><i class="mdi mdi-autorenew"></i></button></h4>
+        </div>
+        <div class="mb-3 col-md-3 col-sm-12">
             <!-- Single Select -->
-            <select class="form-control select2" data-toggle="select2" id="selectCI">                           
+            <select class="form-control select2" data-toggle="select2" id="selectCI">
             </select>
         </div>
+
     </div>
     <script>
         $(document).ready(function() {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('/ci'); ?>',
-                success: function (response) {
-                    $("#selectCI").html(response).fadeIn();
-                }
+            var divEntrega = document.getElementById("entrega");
+            console.log(divEntrega.style.display);
+
+            $("#btn-upEntrega").click(function() {
+                console.log(divEntrega.style.display);
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('/ci') ?>',
+                    success: function(response) {
+                        $("#selectCI").html(response).fadeIn();
+                    }
+                })
             })
-        })
-        /*var x = document.getElementById("fk_carrera").value;
-        console.log(x);*/
+            /*setInterval(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php //echo base_url('/ci'); 
+                            ?>',
+                    success: function(response) {
+                        $("#selectCI").html(response).fadeIn();
+                    }
+                })
+            }, 2000);*/
+        });
+        var x = document.getElementById("selectCI").value;
+        console.log(x);
     </script>
 </div>
