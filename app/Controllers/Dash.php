@@ -22,6 +22,8 @@ class Dash extends Controller
         $dato['academias'] = $year->orderBy('id')->findAll();
         $brigada = new M_brigada();
         $dato['brigadas'] = $brigada->orderBy('id')->findAll();
+        $estudiante = new M_student();
+        $dato['estudiantes'] = $estudiante->orderBy('id')->findAll();
         return view('template/main', $dato);
     }
 
@@ -183,5 +185,14 @@ class Dash extends Controller
             echo "El libro tiene registros pendientes";
         } else
             echo "El libro ha sido eliminado exitosamente";
+    }
+
+    public function ci()
+    {
+        $estudiante = new M_student();
+        $student = $estudiante->orderBy('id')->findAll();
+        foreach ($student as $std) : 
+        echo '<option value="'.$std['id'].'">'.$std['ci'].'</option>';
+        endforeach; 
     }
 }
