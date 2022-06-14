@@ -49,7 +49,11 @@
                 })
             }, 2000);*/
         });
-        var x = document.getElementById("selectCI").value;
-        console.log(x);
+        document.getElementById("btn-upBuscar").addEventListener("click", getID);
+
+        function getID() {
+            var x = document.getElementById("selectCI").value;
+            console.log(x);
+        }
     </script>
 </div>
