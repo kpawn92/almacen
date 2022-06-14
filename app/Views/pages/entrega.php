@@ -48,12 +48,12 @@
                     }
                 })
             }, 2000);*/
-        });
-        document.getElementById("btn-upBuscar").addEventListener("click", getID);
+            document.getElementById("btn-upBuscar").addEventListener("click", getID);
 
-        function getID() {
-            var x = document.getElementById("selectCI").value;
-            console.log(x);
-        }
+            function getID() {
+                var x = document.getElementById("selectCI").value;
+                console.log(x);
+            }
+        });
     </script>
 </div>

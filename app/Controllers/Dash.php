@@ -45,7 +45,7 @@ class Dash extends Controller
             $student = new M_student();
             $rows_report = $student->row_preport($ci);
             if ($rows_report->getNumRows() > 0) {
-                echo "El estudiante ya existe";
+                echo 'El estudiante <strong>'.$nombre.' '.$lastname.'</strong> ya existe';
             } else {
                 $student->guardar($ci, $nombre, $lastname, $direccion, $fk_municipio, $fk_carrera, $fk_year_academico, $fk_brigada);
                 echo "<strong>Datos guardados correctamente...</strong>";
@@ -127,7 +127,7 @@ class Dash extends Controller
             $book = new M_book();
             $rows_report = $book->row_preport($codigo);
             if ($rows_report->getNumRows() > 0) {
-                echo "El libro ya existe";
+                echo 'El libro <strong>'.$titulo.'</strong> ya existe';
             } else {
                 $book->guardar($codigo, $titulo, $precio, $autor, $isbn, $cantidad);
                 echo "<strong>Datos guardados correctamente...</strong>";
@@ -190,7 +190,7 @@ class Dash extends Controller
     public function ci()
     {
         $estudiante = new M_student();
-        $student = $estudiante->orderBy('id')->findAll();
+        $student = $estudiante->orderBy('id', 'DESC')->findAll();
         foreach ($student as $std) : 
         echo '<option value="'.$std['id'].'">'.$std['ci'].'</option>';
         endforeach; 
