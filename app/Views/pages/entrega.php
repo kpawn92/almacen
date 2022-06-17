@@ -24,7 +24,7 @@
             accusamus deleniti cum placeat sapiente blanditiis dolorum expedita enim repellendus perspiciatis
             quasi quae. Quia, accusamus commodi?</p>
         <br>
-        <h4 class="page-title"><button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="mdi mdi-autorenew"></i></button><button class="btn btn-primary ms-2" id="btn-upBuscar"><i class="uil-search-alt"></i></button></h4>
+        <h4 class="page-title"><button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="mdi mdi-autorenew"></i></button><button class="btn btn-primary ms-2" id="btn-upBuscar" style="display: none;"><i class="uil-search-alt"></i></button><button type="button" class="btn btn-danger ms-2" id="close-form" style="display: none;"><i class="mdi mdi-window-close"></i></button></h4>
         <div class="mb-3 col-md-3 col-sm-12" style="display: none;" id="select-entrega">
             <!-- Single Select -->
             <label class="form-label" for="id_student">Seleccione el <strong>carne de identidad</strong></label>
@@ -32,8 +32,8 @@
             </select>
         </div>
 
-        <div class="row" id="dataTable-entrega" style="display: none;">
-            <div class="col-md-6 col-lg-6 col-sm-12">
+        <div class="row" id="content-entrega">
+            <div class="col-md-6 col-lg-6 col-sm-12" id="dataTable-entrega" style="display: none;">
                 <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
                     <div class="row">
                         <h4 class="header-title">Libros pendientes<button class="btn btn-primary ms-2" id="btn-update-book"><i class="mdi mdi-autorenew"></i></button></h4>
@@ -62,6 +62,44 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 col-lg-6 col-sm-12" id="form-entrega" style="display: none;">
+                <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
+                    <h4 class="header-title">Formulario</h4>
+
+                    <p class="text-muted font-13">Lorem ipsum <code>{Breve descripcion del form}</code> dolor sit amet
+                        consectetur adipisicing elit. Atque iusto cum, vel cupiditate quaerat modi quis porro dolores est
+                        incidunt exercitatiom repellendus perspiciatis
+                        quasi quae. Quia, accusamus commodi?</p>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="alert alert-primary" role="alert" id="alert4" style="display: none">
+                                <i class="dripicons-information me-2"></i>
+                                <p id="resp-entrega"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <form action="" id="form4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="idEstudiante" name="fk_estudiante">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="idLibro">Libro:</label>
+                                        <input type="text" class="form-control" id="idLibro" name="fk_libro">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="precio">Precio:</label>
+                                        <input type="text" class="form-control" id="precio" name="precio" placeholder="Entre el precio">
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <button class="btn btn-warning" type="button" id="sub_l">Enviar form</button>
+                    <a class="btn btn-primary" href="#dow-book" id="btn-listbooks">Mostrar Listado <i class="uil-angle-double-down"></i></a>
+                    </form>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -70,11 +108,17 @@
         $(document).ready(function() {
             var divEntrega = document.getElementById("select-entrega");
             var divDttEntrega = document.getElementById("dataTable-entrega");
-            console.log(divEntrega.style.display);
+            var divFormEntrega = document.getElementById("form-entrega");
+            var btnSearch = document.getElementById("btn-upBuscar");
+            var btnClose = document.getElementById("close-form");
+            var divContentEntrega = document.getElementById("content-entrega");
+            //console.log(divEntrega.style.display);
 
             $("#btn-upEntrega").click(function() {
                 divEntrega.style.display = "";
-                divDttEntrega.style.display = "";
+                btnSearch.style.display = "";
+                
+                //divDttEntrega.style.display = "";
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('/ci') ?>',
@@ -82,7 +126,7 @@
                         $("#selectCI").html(response).fadeIn();
                     }
                 })
-            })
+            });
             /*setInterval(function() {
                 $.ajax({
                     type: 'POST',
@@ -96,9 +140,56 @@
             document.getElementById("btn-upBuscar").addEventListener("click", getID);
 
             function getID() {
-                var x = document.getElementById("selectCI").value;
-                console.log(x);
+                divContentEntrega.style.display = "";
+                divFormEntrega.style.display = "";
+                btnClose.style.display = "";
+                var idStudent = document.getElementById("selectCI").value;
+                document.getElementById("idEstudiante").value = idStudent;
+                console.log(idStudent);
             }
+
+            btnClose.addEventListener("click", closeDiv);
+            function closeDiv() {
+                divContentEntrega.style.display = "none";
+            }
+            /*var f = "listarLibro";
+
+            var tableEntregados = $('#prestamosBook').DataTable({
+                ajax: {
+                    "url": "<?php //echo base_url('/list_entrega'); 
+                            ?>",
+                    "method": "POST",
+                    "data": {
+                        f: f
+                    }
+                },
+                columns: [{
+                        "data": "codigo"
+                    },
+                    {
+                        "data": "titulo"
+                    },
+                    {
+                        "data": "precio"
+                    },
+                    {
+                        "data": "autor"
+                    },
+                    {
+                        "data": "isbn"
+                    },
+                    {
+                        "data": "cantidad"
+                    },
+                    {
+                        "defaultContent": `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="dripicons-document-edit"></i></button>
+                                       <button type="button" class="del-book btn btn-danger"><i class="dripicons-trash"></i></button>`
+                    }
+                ],
+                "language": {
+                    "url": "assets/json/Spanish.json"
+                },
+            });*/
         });
     </script>
 </div>
