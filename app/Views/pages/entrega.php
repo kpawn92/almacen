@@ -117,7 +117,7 @@
             $("#btn-upEntrega").click(function() {
                 divEntrega.style.display = "";
                 btnSearch.style.display = "";
-                
+
                 //divDttEntrega.style.display = "";
                 $.ajax({
                     type: 'POST',
@@ -145,12 +145,22 @@
                 btnClose.style.display = "";
                 var idStudent = document.getElementById("selectCI").value;
                 document.getElementById("idEstudiante").value = idStudent;
+
+                var selectorCI = document.getElementById('selectCI');
+
+                // ✅ Set the disabled attribute
+                selectorCI.setAttribute('disabled', '');
+
                 console.log(idStudent);
             }
 
             btnClose.addEventListener("click", closeDiv);
+
             function closeDiv() {
                 divContentEntrega.style.display = "none";
+                btnClose.style.display = "none";
+                // ✅ Remove the disabled attribute
+                document.getElementById('selectCI').removeAttribute('disabled');
             }
             /*var f = "listarLibro";
 
