@@ -24,7 +24,7 @@
             accusamus deleniti cum placeat sapiente blanditiis dolorum expedita enim repellendus perspiciatis
             quasi quae. Quia, accusamus commodi?</p>
         <br>
-        <h4 class="page-title"><button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="mdi mdi-autorenew"></i></button><button class="btn btn-primary ms-2" id="btn-upBuscar" style="display: none;"><i class="uil-search-alt"></i></button><button type="button" class="btn btn-danger ms-2" id="close-form" style="display: none;"><i class="mdi mdi-window-close"></i></button></h4>
+        <h4 class="page-title"><button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="mdi mdi-autorenew"></i></button><button class="btn btn-primary ms-2" id="btn-upBuscar" style="display: none;"><i class="uil-search-alt"></i></button><button type="button" class="btn btn-dark ms-2" id="close-form" style="display: none;"><i class="mdi mdi-window-close"></i></button></h4>
         <div class="mb-3 col-md-3 col-sm-12" style="display: none;" id="select-entrega">
             <!-- Single Select -->
             <label class="form-label" for="id_student">Seleccione el <strong>carne de identidad</strong></label>
@@ -150,6 +150,8 @@
 
                 // ✅ Set the disabled attribute
                 selectorCI.setAttribute('disabled', '');
+                document.getElementById("btn-upEntrega").setAttribute('disabled', '');
+                document.getElementById("btn-upBuscar").setAttribute('disabled', '');
 
                 console.log(idStudent);
             }
@@ -161,6 +163,8 @@
                 btnClose.style.display = "none";
                 // ✅ Remove the disabled attribute
                 document.getElementById('selectCI').removeAttribute('disabled');
+                document.getElementById("btn-upEntrega").removeAttribute('disabled');
+                document.getElementById("btn-upBuscar").removeAttribute('disabled');
             }
             /*var f = "listarLibro";
 
