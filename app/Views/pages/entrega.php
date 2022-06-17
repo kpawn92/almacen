@@ -24,7 +24,12 @@
             accusamus deleniti cum placeat sapiente blanditiis dolorum expedita enim repellendus perspiciatis
             quasi quae. Quia, accusamus commodi?</p>
         <br>
-        <h4 class="page-title"><button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="mdi mdi-autorenew"></i></button><button class="btn btn-primary ms-2" id="btn-upBuscar" style="display: none;"><i class="uil-search-alt"></i></button><button type="button" class="btn btn-dark ms-2" id="close-form" style="display: none;"><i class="mdi mdi-window-close"></i></button></h4>
+        <h4 class="page-title">
+            <button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="mdi mdi-autorenew"></i> Cargar CI</button>
+            <button class="btn btn-primary ms-2" id="btn-upBuscar" style="display: none;"><i class="uil-search-alt"></i> Buscar</button>
+            <button type="button" class="btn btn-dark ms-2" id="close-form" style="display: none;"><i class="mdi mdi-window-close"></i> Deseleccionar</button>
+        </h4>
+
         <div class="mb-3 col-md-3 col-sm-12" style="display: none;" id="select-entrega">
             <!-- Single Select -->
             <label class="form-label" for="id_student">Seleccione el <strong>carne de identidad</strong></label>
@@ -33,6 +38,44 @@
         </div>
 
         <div class="row" id="content-entrega">
+            <div class="col-md-6 col-lg-6 col-sm-12" id="form-entrega" style="display: none;">
+                <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
+                    <h4 class="header-title">Formulario</h4>
+
+                    <p class="text-muted font-13">Lorem ipsum <code>{Breve descripcion del form}</code> dolor sit amet
+                        consectetur adipisicing elit. Atque iusto cum, vel cupiditate quaerat modi quis porro dolores est
+                        incidunt exercitatiom repellendus perspiciatis
+                        quasi quae. Quia, accusamus commodi?</p>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="alert alert-primary" role="alert" id="alert4" style="display: none">
+                                <i class="dripicons-information me-2"></i>
+                                <p id="resp-entrega"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <form action="" id="form4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="hidden" class="form-control" id="idEstudiante" name="fk_estudiante">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="idLibro">Libro <code>(c&oacute;digo|t&iacute;tulo)</code>:</label>
+                                        <select class="form-control select2" data-toggle="select2" id="idLibro" name="fk_libro">
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Fecha de entrega</label>
+                                        <input type="text" class="form-control date" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true">
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <button class="btn btn-warning" type="button" id="sub_l">Enviar form</button>
+                    </form>
+                </div>
+            </div>
             <div class="col-md-6 col-lg-6 col-sm-12" id="dataTable-entrega" style="display: none;">
                 <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
                     <div class="row">
@@ -60,44 +103,6 @@
                         </table>
                         <div id="dow-entrega"></div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-sm-12" id="form-entrega" style="display: none;">
-                <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
-                    <h4 class="header-title">Formulario</h4>
-
-                    <p class="text-muted font-13">Lorem ipsum <code>{Breve descripcion del form}</code> dolor sit amet
-                        consectetur adipisicing elit. Atque iusto cum, vel cupiditate quaerat modi quis porro dolores est
-                        incidunt exercitatiom repellendus perspiciatis
-                        quasi quae. Quia, accusamus commodi?</p>
-                    <br>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="alert alert-primary" role="alert" id="alert4" style="display: none">
-                                <i class="dripicons-information me-2"></i>
-                                <p id="resp-entrega"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-content">
-                        <form action="" id="form4">
-                            <div class="row">
-                                <div class="col-12">
-                                    <input type="text" class="form-control" id="idEstudiante" name="fk_estudiante">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="idLibro">Libro:</label>
-                                        <input type="text" class="form-control" id="idLibro" name="fk_libro">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="precio">Precio:</label>
-                                        <input type="text" class="form-control" id="precio" name="precio" placeholder="Entre el precio">
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                    <button class="btn btn-warning" type="button" id="sub_l">Enviar form</button>
-                    <a class="btn btn-primary" href="#dow-book" id="btn-listbooks">Mostrar Listado <i class="uil-angle-double-down"></i></a>
-                    </form>
                 </div>
             </div>
         </div>
@@ -137,9 +142,9 @@
                     }
                 })
             }, 2000);*/
-            document.getElementById("btn-upBuscar").addEventListener("click", getID);
+            document.getElementById("btn-upBuscar").addEventListener("click", setPrestamo);
 
-            function getID() {
+            function setPrestamo() {
                 divContentEntrega.style.display = "";
                 divFormEntrega.style.display = "";
                 btnClose.style.display = "";
@@ -152,6 +157,14 @@
                 selectorCI.setAttribute('disabled', '');
                 document.getElementById("btn-upEntrega").setAttribute('disabled', '');
                 document.getElementById("btn-upBuscar").setAttribute('disabled', '');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('/books') ?>',
+                    success: function(res) {
+                        $("#idLibro").html(res).fadeIn();
+                    }
+                });
 
                 console.log(idStudent);
             }

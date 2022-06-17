@@ -1,0 +1,6 @@
+CRITICAL - 2022-06-17 13:04:15 --> Cannot access offset of type string on string
+#0 C:\xampp\htdocs\almacen\system\CodeIgniter.php(832): App\Controllers\Entrega->book()
+#1 C:\xampp\htdocs\almacen\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Entrega))
+#2 C:\xampp\htdocs\almacen\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\almacen\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}

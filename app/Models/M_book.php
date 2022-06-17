@@ -1,9 +1,11 @@
-<?php 
+<?php
+
 namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_book extends Model{
+class M_book extends Model
+{
     protected $table      = 'tb_libro';
     // Uncomment below if you want add primary key
     protected $primaryKey = 'id';
@@ -12,9 +14,9 @@ class M_book extends Model{
     {
         $db = \Config\Database::connect();
         $builder = $db->table('tb_libro');
-        $data = [                        
+        $data = [
             'codigo' => $codigo,
-            'titulo' => $titulo,            
+            'titulo' => $titulo,
             'precio' => $precio,
             'autor' => $autor,
             'isbn' => $isbn,
@@ -47,17 +49,24 @@ class M_book extends Model{
             'precio' => $precio,
             'autor' => $autor,
             'isbn' => $isbn,
-            'cantidad' => $cantidad        
+            'cantidad' => $cantidad
         ];
-        $builder->where('id', $id);        
+        $builder->where('id', $id);
         return $builder->update($data);
     }
 
     function del_book($id_libro)
     {
         $db = \Config\Database::connect();
-        $builder = $db->table('tb_libro');       
+        $builder = $db->table('tb_libro');
         $builder->where('id', $id_libro);
         return $builder->delete();
+    }
+
+    function getBook()
+    {
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT * FROM tb_libro WHERE cantidad > 0 ORDER BY id DESC");
+        return $query->getResultArray();
     }
 }

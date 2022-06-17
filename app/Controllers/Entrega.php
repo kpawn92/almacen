@@ -23,4 +23,13 @@ class Entrega extends Controller
             echo $jsonstring;
         }
     }
+
+    public function book()
+    {
+        $libro = new M_book();
+        $books = $libro->getBook();
+        foreach ($books as $book) :
+            echo '<option value="' . $book['id'] . '">' . $book['codigo'] .' | '. $book['titulo'] . '</option>';
+        endforeach;
+    }
 }
