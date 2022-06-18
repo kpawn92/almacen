@@ -69,4 +69,11 @@ class M_book extends Model
         $query = $db->query("SELECT * FROM tb_libro WHERE cantidad > 0 ORDER BY id DESC");
         return $query->getResultArray();
     }
+
+    function descontar($fk_libro)
+    {
+        $db = \Config\Database::connect();
+        $query = $db->query("UPDATE tb_libro SET cantidad=cantidad-1 WHERE id = '$fk_libro'");
+        return $query;
+    }
 }

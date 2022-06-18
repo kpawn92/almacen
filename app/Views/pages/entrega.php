@@ -22,8 +22,7 @@
             incidunt exercitationem quibusdam tempore repudiandae, enim deserunt dolorum eos excepturi rerum.
             Aut, culpa mollitia hic quidem, vel ex veritatis assumenda vero minus repudiandae dolor inventore
             accusamus deleniti cum placeat sapiente blanditiis dolorum expedita enim repellendus perspiciatis
-            quasi quae. Quia, accusamus commodi?</p>
-        <br>
+            quasi quae. Quia, accusamus commodi?</p>        
         <h4 class="page-title">
             <button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="mdi mdi-autorenew"></i> Cargar CI</button>
             <button class="btn btn-primary ms-2" id="btn-upBuscar" style="display: none;"><i class="uil-search-alt"></i> Buscar</button>
@@ -38,18 +37,12 @@
         </div>
 
         <div class="row" id="content-entrega">
-            <div class="col-md-6 col-lg-6 col-sm-12" id="form-entrega" style="display: none;">
+            <div class="col-md-3 col-lg-3 col-sm-12" id="form-entrega" style="display: none;">
                 <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
                     <h4 class="header-title">Formulario</h4>
-
-                    <p class="text-muted font-13">Lorem ipsum <code>{Breve descripcion del form}</code> dolor sit amet
-                        consectetur adipisicing elit. Atque iusto cum, vel cupiditate quaerat modi quis porro dolores est
-                        incidunt exercitatiom repellendus perspiciatis
-                        quasi quae. Quia, accusamus commodi?</p>
-                    <br>
                     <div class="row">
-                        <div class="col-6">
-                            <div class="alert alert-primary" role="alert" id="alert4" style="display: none">
+                        <div class="col-12">
+                            <div class="alert alert-primary" role="alert" id="alert-entrega" style="display: none">
                                 <i class="dripicons-information me-2"></i>
                                 <p id="resp-entrega"></p>
                             </div>
@@ -66,20 +59,20 @@
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Fecha de entrega</label>
-                                        <input type="text" class="form-control date" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true">
+                                        <label class="form-label">Fecha de entrega <code>(mm/dd/YYYY):</code></label>
+                                        <input type="text" class="form-control date" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true" name="fecha_entrega">
                                     </div>
                                 </div>
                             </div>
                     </div>
-                    <button class="btn btn-warning" type="button" id="sub_l">Enviar form</button>
+                    <button class="btn btn-warning" type="button" id="sub-entrega">Enviar form</button>
                     </form>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-6 col-sm-12" id="dataTable-entrega" style="display: none;">
+            <div class="col-md-9 col-lg-9 col-sm-12" id="dataTable-entrega" style="display: none;">
                 <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
                     <div class="row">
-                        <h4 class="header-title">Libros pendientes<button class="btn btn-primary ms-2" id="btn-update-book"><i class="mdi mdi-autorenew"></i></button></h4>
+                        <h4 class="header-title">Libros pendientes<button class="btn btn-primary ms-2" id="btn-update-entrega"><i class="mdi mdi-autorenew"></i></button></h4>
                     </div>
                     <p class="text-muted font-13">Lorem ipsum <code>{Breve descripcion del DataTable}</code> dolor sit amet
                         consectetur adipisicing elit. Atque iusto cum, vel cupiditate quaerat modi quis porro dolores est
@@ -106,11 +99,28 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <script>
         $(document).ready(function() {
+
+            document.getElementById("sub-entrega").addEventListener("click", function() {
+                //console.log($('#form4').serialize());
+                $.ajax({
+                        url: '<?php echo base_url('/save_entrega'); ?>',
+                        type: 'POST',
+                        data: $('#form4').serialize(),
+                    })
+                    .done(function(res) {
+                        $('#resp-entrega').html(res);
+                        var cajaAlert = document.getElementById('alert-entrega');
+                        cajaAlert.style.display = '';
+                        $("#alert-entrega").show();
+                        setTimeout(function() {
+                            $("#alert-entrega").hide();
+                        }, 6000);
+                    })
+            });
             var divEntrega = document.getElementById("select-entrega");
             var divDttEntrega = document.getElementById("dataTable-entrega");
             var divFormEntrega = document.getElementById("form-entrega");
@@ -166,57 +176,71 @@
                     }
                 });
 
-                console.log(idStudent);
+                /* Ajax tabla de libros prestados */
+                var f = idStudent;
+
+                var tableEntregados = $('#prestamosBook').DataTable({
+                    ajax: {
+                        "url": "<?= base_url('/list_entrega'); ?>",
+                        "method": "POST",
+                        "data": {
+                            f: f
+                        }
+                    },
+                    columns: [{
+                            "data": "codigo"
+                        },
+                        {
+                            "data": "titulo"
+                        },
+                        {
+                            "data": "isbn"
+                        },
+                        {
+                            "data": "fecha_entrega"
+                        },
+                        {
+                            "data": "fecha_dev"
+                        },
+                        {
+                            "defaultContent": `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="dripicons-document-edit"></i></button>
+                                       <button type="button" class="del-book btn btn-danger"><i class="dripicons-trash"></i></button>`
+                        }
+                    ],
+                    "language": {
+                        "url": "assets/json/Spanish.json"
+                    },
+                });
+                document.getElementById("dataTable-entrega").style.display = "";
+
+                document.getElementById("btn-update-entrega").addEventListener("click", function () {
+                   tableEntregados.ajax.reload();                     
+                });
+                //console.log(idStudent);
+                btnClose.addEventListener("click", function () {
+                    tableEntregados.destroy();
+                    divContentEntrega.style.display = "none";
+                    btnClose.style.display = "none";
+                    // ✅ Remove the disabled attribute
+                    document.getElementById('selectCI').removeAttribute('disabled');
+                    document.getElementById("btn-upEntrega").removeAttribute('disabled');
+                    document.getElementById("btn-upBuscar").removeAttribute('disabled');
+                });
+                
             }
 
-            btnClose.addEventListener("click", closeDiv);
 
+            /*btnClose.addEventListener("click", closeDiv);
             function closeDiv() {
+                tableEntregados.destroy();
                 divContentEntrega.style.display = "none";
                 btnClose.style.display = "none";
                 // ✅ Remove the disabled attribute
                 document.getElementById('selectCI').removeAttribute('disabled');
                 document.getElementById("btn-upEntrega").removeAttribute('disabled');
                 document.getElementById("btn-upBuscar").removeAttribute('disabled');
-            }
-            /*var f = "listarLibro";
+            }*/
 
-            var tableEntregados = $('#prestamosBook').DataTable({
-                ajax: {
-                    "url": "<?php //echo base_url('/list_entrega'); 
-                            ?>",
-                    "method": "POST",
-                    "data": {
-                        f: f
-                    }
-                },
-                columns: [{
-                        "data": "codigo"
-                    },
-                    {
-                        "data": "titulo"
-                    },
-                    {
-                        "data": "precio"
-                    },
-                    {
-                        "data": "autor"
-                    },
-                    {
-                        "data": "isbn"
-                    },
-                    {
-                        "data": "cantidad"
-                    },
-                    {
-                        "defaultContent": `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="dripicons-document-edit"></i></button>
-                                       <button type="button" class="del-book btn btn-danger"><i class="dripicons-trash"></i></button>`
-                    }
-                ],
-                "language": {
-                    "url": "assets/json/Spanish.json"
-                },
-            });*/
         });
     </script>
 </div>

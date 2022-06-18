@@ -51,6 +51,9 @@ $routes->post('del_book', 'Dash::del_book');
 $routes->post('ci', 'Dash::ci');
 /* Listado de libros pendientes del estudiante */
 $routes->post('books', 'Entrega::book');
+$routes->post('list_entrega', 'Entrega::list_entrega');
+$routes->post('save_entrega', 'Entrega::save_entrega');
+
 
 /*
  * --------------------------------------------------------------------

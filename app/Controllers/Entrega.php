@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\M_student;
 use App\Models\M_book;
+use App\Models\M_entrega;
 
 use CodeIgniter\Controller;
 
@@ -11,17 +12,19 @@ class Entrega extends Controller
 {
     public function list_entrega()
     {
-        $libros = new M_book();
-        if ($_POST['f'] == "listarLibro") {
-            $json = array();
-            $book = $libros->list_book();
+        $id_estudiante = $_POST['f'];
+        $librosEntregados = new M_entrega();
 
-            foreach ($book as $data) {
-                $json['data'][] = $data;
-            }
-            $jsonstring = json_encode($json);
-            echo $jsonstring;
+        $json = array();
+        $books = $librosEntregados->list_bookEntregados($id_estudiante);
+
+        //print_r($books);
+
+        foreach ($books as $data) {
+            $json['data'][] = $data;
         }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
     }
 
     public function book()
@@ -29,7 +32,36 @@ class Entrega extends Controller
         $libro = new M_book();
         $books = $libro->getBook();
         foreach ($books as $book) :
-            echo '<option value="' . $book['id'] . '">' . $book['codigo'] .' | '. $book['titulo'] . '</option>';
+            echo '<option value="' . $book['id'] . '">' . $book['codigo'] . ' | ' . $book['titulo'] . '</option>';
         endforeach;
+    }
+
+    public function save_entrega()
+    {
+        $request = \Config\Services::request();
+
+        $validation = $this->validate([
+            'fecha_entrega' => 'required'
+        ]);
+
+        if (!$validation) {
+            $confirmBook  = $this->validator;
+            return $confirmBook->listErrors();
+        } else {
+            extract($request->getPost());
+
+            $sb = new M_entrega();
+            $book = new M_book();
+            $rows_report = $sb->row_preport($fk_estudiante, $fk_libro);
+            if ($rows_report->getNumRows() > 0) {
+                echo 'El estudiante ya posee el libro';
+            } else {
+                $date_entrega = strtotime($fecha_entrega);
+                $book->descontar($fk_libro);
+                $sb->guardar($fk_estudiante, $fk_libro, $date_entrega);
+
+                echo "Datos guardados correctamente";
+            }
+        }
     }
 }
