@@ -22,7 +22,7 @@
             incidunt exercitationem quibusdam tempore repudiandae, enim deserunt dolorum eos excepturi rerum.
             Aut, culpa mollitia hic quidem, vel ex veritatis assumenda vero minus repudiandae dolor inventore
             accusamus deleniti cum placeat sapiente blanditiis dolorum expedita enim repellendus perspiciatis
-            quasi quae. Quia, accusamus commodi?</p>        
+            quasi quae. Quia, accusamus commodi?</p>
         <h4 class="page-title">
             <button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="mdi mdi-autorenew"></i> Cargar CI</button>
             <button class="btn btn-primary ms-2" id="btn-upBuscar" style="display: none;"><i class="uil-search-alt"></i> Buscar</button>
@@ -159,7 +159,7 @@
                 divFormEntrega.style.display = "";
                 btnClose.style.display = "";
                 var idStudent = document.getElementById("selectCI").value;
-                document.getElementById("idEstudiante").value = idStudent;
+                var inputStudent = document.getElementById("idEstudiante").value = idStudent;
 
                 var selectorCI = document.getElementById('selectCI');
 
@@ -213,11 +213,12 @@
                 });
                 document.getElementById("dataTable-entrega").style.display = "";
 
-                document.getElementById("btn-update-entrega").addEventListener("click", function () {
-                   tableEntregados.ajax.reload();                     
+                document.getElementById("btn-update-entrega").addEventListener("click", function() {
+                  tableEntregados.ajax.reload();
+                  console.log(idStudent);
                 });
                 //console.log(idStudent);
-                btnClose.addEventListener("click", function () {
+                btnClose.addEventListener("click", function() {
                     tableEntregados.destroy();
                     divContentEntrega.style.display = "none";
                     btnClose.style.display = "none";
@@ -226,7 +227,7 @@
                     document.getElementById("btn-upEntrega").removeAttribute('disabled');
                     document.getElementById("btn-upBuscar").removeAttribute('disabled');
                 });
-                
+
             }
 
 
