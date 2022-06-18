@@ -11,7 +11,7 @@
  Target Server Version : 100419
  File Encoding         : 65001
 
- Date: 10/06/2022 15:52:59
+ Date: 17/06/2022 23:18:34
 */
 
 SET NAMES utf8mb4;
@@ -42,19 +42,24 @@ CREATE TABLE `op_historial_libroestudiante`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_estudiante` int(11) NOT NULL,
   `fk_libro` int(11) NOT NULL,
-  `date_entrega` int(11) NULL DEFAULT NULL,
+  `date_entrega` int(11) NOT NULL,
   `date_devol` int(11) NULL DEFAULT NULL,
-  `date_venta` int(11) NULL DEFAULT NULL,
+  `status` int(2) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_op_historial_libroestudiante_tb_estudiante_1`(`fk_estudiante`) USING BTREE,
   INDEX `fk_op_historial_libroestudiante_tb_libro_1`(`fk_libro`) USING BTREE,
   CONSTRAINT `fk_op_historial_libroestudiante_tb_estudiante_1` FOREIGN KEY (`fk_estudiante`) REFERENCES `tb_estudiante` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_op_historial_libroestudiante_tb_libro_1` FOREIGN KEY (`fk_libro`) REFERENCES `tb_libro` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of op_historial_libroestudiante
 -- ----------------------------
+INSERT INTO `op_historial_libroestudiante` VALUES (1, 84, 11, 1655442000, NULL, 1);
+INSERT INTO `op_historial_libroestudiante` VALUES (2, 84, 10, 1655442000, NULL, 1);
+INSERT INTO `op_historial_libroestudiante` VALUES (3, 83, 11, 1655442000, NULL, 1);
+INSERT INTO `op_historial_libroestudiante` VALUES (4, 83, 10, 1655442000, NULL, 1);
+INSERT INTO `op_historial_libroestudiante` VALUES (5, 83, 9, 1655442000, NULL, 1);
 
 -- ----------------------------
 -- Table structure for tb_brigada
@@ -140,9 +145,9 @@ CREATE TABLE `tb_libro`  (
 -- ----------------------------
 -- Records of tb_libro
 -- ----------------------------
-INSERT INTO `tb_libro` VALUES (9, 'pyton', 'sdasd', 'asdasd', 'asda', 'sdasd', 123);
-INSERT INTO `tb_libro` VALUES (10, 'awq48', 'dd', '120.36', 'asda', 'sdasd', 123);
-INSERT INTO `tb_libro` VALUES (11, 'php', 'dasda', '12.3', 'sada', '121', 12);
+INSERT INTO `tb_libro` VALUES (9, 'pyton', 'sdasd', 'asdasd', 'asda', 'sdasd', 122);
+INSERT INTO `tb_libro` VALUES (10, 'awq48', 'dd', '120.36', 'asda', 'sdasd', 121);
+INSERT INTO `tb_libro` VALUES (11, 'php', 'dasda', '12.3', 'sada', '121', 10);
 
 -- ----------------------------
 -- Table structure for tb_municipio
