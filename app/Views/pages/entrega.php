@@ -52,7 +52,7 @@
                         <form action="" id="form4">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="hidden" class="form-control" id="idEstudiante" name="fk_estudiante">
+                                    <input type="text" class="form-control" id="idEstudiante" name="fk_estudiante">
                                     <div class="mb-3">
                                         <label class="form-label" for="idLibro">Libro <code>(c&oacute;digo|t&iacute;tulo)</code>:</label>
                                         <select class="form-control select2" data-toggle="select2" id="idLibro" name="fk_libro">
@@ -177,7 +177,7 @@
                 });
 
                 /* Ajax tabla de libros prestados */
-                var f = idStudent;
+                const f = selectorCI.value;
 
                 var tableEntregados = $('#prestamosBook').DataTable({
                     ajax: {
@@ -214,18 +214,23 @@
                 document.getElementById("dataTable-entrega").style.display = "";
 
                 document.getElementById("btn-update-entrega").addEventListener("click", function() {
-                  tableEntregados.ajax.reload();
-                  console.log(idStudent);
+                    tableEntregados.ajax.reload();
+                    console.log(f);
                 });
                 //console.log(idStudent);
                 btnClose.addEventListener("click", function() {
                     tableEntregados.destroy();
-                    divContentEntrega.style.display = "none";
+                    tableEntregados.clear().draw();
+                    //divContentEntrega.style.display = "none";
                     btnClose.style.display = "none";
                     // ✅ Remove the disabled attribute
                     document.getElementById('selectCI').removeAttribute('disabled');
                     document.getElementById("btn-upEntrega").removeAttribute('disabled');
                     document.getElementById("btn-upBuscar").removeAttribute('disabled');
+                    /*document.getElementById("idEstudiante").value = "";
+                    console.log(document.getElementById("idEstudiante").value);*/
+                    console.log(selectorCI.value);
+                    f = "";
                 });
 
             }
