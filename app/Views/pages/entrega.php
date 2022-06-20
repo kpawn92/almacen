@@ -213,12 +213,9 @@
                 });
                 document.getElementById("dataTable-entrega").style.display = "";
 
-                document.getElementById("btn-update-entrega").addEventListener("click", function() {
-                    //tableEntregados.destroy();
-                    //tableEntregados.clear().draw();
+                document.getElementById("btn-update-entrega").addEventListener("click", function() {                  
                     closeDiv();
                     setPrestamo();
-                    
                     console.log(f);
                 });
                 //console.log(idStudent);
