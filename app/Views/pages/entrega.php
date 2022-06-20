@@ -166,7 +166,7 @@
                 // ✅ Set the disabled attribute
                 selectorCI.setAttribute('disabled', '');
                 document.getElementById("btn-upEntrega").setAttribute('disabled', '');
-                document.getElementById("btn-upBuscar").setAttribute('disabled', '');
+                //document.getElementById("btn-upBuscar").setAttribute('disabled', '');
 
                 $.ajax({
                     type: 'POST',
@@ -214,11 +214,16 @@
                 document.getElementById("dataTable-entrega").style.display = "";
 
                 document.getElementById("btn-update-entrega").addEventListener("click", function() {
-                    tableEntregados.ajax.reload();
+                    //tableEntregados.destroy();
+                    //tableEntregados.clear().draw();
+                    closeDiv();
+                    setPrestamo();
+                    
                     console.log(f);
                 });
                 //console.log(idStudent);
-                btnClose.addEventListener("click", function() {
+                btnClose.addEventListener("click", closeDiv);
+                function closeDiv() {
                     tableEntregados.destroy();
                     tableEntregados.clear().draw();
                     //divContentEntrega.style.display = "none";
@@ -226,13 +231,11 @@
                     // ✅ Remove the disabled attribute
                     document.getElementById('selectCI').removeAttribute('disabled');
                     document.getElementById("btn-upEntrega").removeAttribute('disabled');
-                    document.getElementById("btn-upBuscar").removeAttribute('disabled');
+                    //document.getElementById("btn-upBuscar").removeAttribute('disabled');
                     /*document.getElementById("idEstudiante").value = "";
-                    console.log(document.getElementById("idEstudiante").value);*/
-                    console.log(selectorCI.value);
-                    f = "";
-                });
+                    console.log(document.getElementById("idEstudiante").value);*/                   
 
+                };
             }
 
 
