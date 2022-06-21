@@ -153,8 +153,7 @@
         </div>
     </div>
     <form action="<?= base_url('/del_book'); ?>" method="post">
-        <input type="text"  name="id_libro" id="retornoDelB">
-        <input type="submit" value="send">
+        <input type="hidden"  name="id_libro" id="retornoDelB">
     </form>
     <?= $this->include('pages/dependencias/books'); ?>
 </div>

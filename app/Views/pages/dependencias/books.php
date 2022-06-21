@@ -1,5 +1,6 @@
 <script>
     $(document.getElementById('libros')).ready(function() {
+        document.getElementById("retornoDelB").value = "";
         /* Enviar formulario - libros */
         $('#sub_l').click(function() {
             var formLibro = $('#form2').serialize();
@@ -11,6 +12,7 @@
                 })
                 .done(function(res) {
                     $('#resp-book').html(res);
+                    tableBooks.ajax.reload();
                     var cajaDos = document.getElementById('alert3');
                     cajaDos.style.display = '';
                     $("#alert3").show();
@@ -77,6 +79,7 @@
 
             $(".del-book").on("click", function() {
                 var id_libro = data2.id_book;
+                borrarLibro(id_libro);
                 Swal.fire({
                     title: 'Seguro?',
                     text: "Se eliminaran todos los datos del libro",
@@ -87,12 +90,11 @@
                     confirmButtonText: 'Si, borrarlo!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        borrarLibro(id_libro);
                         var borrado = document.getElementById("retornoDelB").value;
                         if( borrado != "false"){
                             delTrue();
                         }else {
-                            delFalse();
+                            delFalse();                            
                         }
 
                         console.log(borrado);
@@ -102,19 +104,23 @@
             });
 
             function delTrue() {
+                document.getElementById("retornoDelB").value = "";
                 Swal.fire(
                     'Borrado!',
                     'Se completo el borrado del registro.',
-                    'success'
+                    'success'                    
                 );
+                tableBooks.ajax.reload();
             }
 
             function delFalse() {
+                document.getElementById("retornoDelB").value = "";
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'El registro tiene dependencias!'
-                })
+                });   
+                tableBooks.ajax.reload();                           
             }
 
             function borrarLibro(id_libro) {
@@ -127,8 +133,10 @@
                     },
                     complete: function(data) {
                         //return JSON.stringify(data.responseText);
-                        var respuesta = JSON.stringify(data.responseText);                        
-                        $('#retornoDelB').val(respuesta);                      
+                        //var respuesta = JSON.stringify(data.responseText);                        
+                        var respuesta = JSON.parse(data.responseText);                        
+                        $('#retornoDelB').val(respuesta);
+                        //alert(JSON.parse(data.responseText));              
                     }
                 });
             }
