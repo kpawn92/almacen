@@ -182,9 +182,14 @@ class Dash extends Controller
         extract($request->getPost());
         $query1 = $book->del_book($id_libro);
         if ($query1 != true) {
+            echo "false";
+        }else echo "true";
+        
+        
+        /*if ($query1 != true) {
             echo "El libro tiene registros pendientes";
         } else
-            echo "El libro ha sido eliminado exitosamente";
+            echo "El libro ha sido eliminado exitosamente"; */
     }
 
     public function ci()

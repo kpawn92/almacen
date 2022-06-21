@@ -63,6 +63,8 @@
         /*  */
         $("#books tbody").on('click', 'tr', function() {
             var data2 = tableBooks.row(this).data();
+            
+            
             console.log(data2);
             $("#id_libro").val(data2.id_book);
             //$("#id-del").val(data.id);
@@ -86,15 +88,34 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         borrarLibro(id_libro);
-                        Swal.fire(
-                            'Borrado!',
-                            'Se completo el borrado del registro.',
-                            'success'
-                        );
-                        console.log('eliminado');
+                        var borrado = document.getElementById("retornoDelB").value;
+                        if( borrado != "false"){
+                            delTrue();
+                        }else {
+                            delFalse();
+                        }
+
+                        console.log(borrado);
+
                     }
                 })
             });
+
+            function delTrue() {
+                Swal.fire(
+                    'Borrado!',
+                    'Se completo el borrado del registro.',
+                    'success'
+                );
+            }
+
+            function delFalse() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'El registro tiene dependencias!'
+                })
+            }
 
             function borrarLibro(id_libro) {
                 console.log("funcion");
@@ -103,6 +124,11 @@
                     type: 'POST',
                     data: {
                         id_libro: id_libro
+                    },
+                    complete: function(data) {
+                        //return JSON.stringify(data.responseText);
+                        var respuesta = JSON.stringify(data.responseText);                        
+                        $('#retornoDelB').val(respuesta);                      
                     }
                 });
             }
