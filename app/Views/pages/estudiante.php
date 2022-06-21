@@ -244,5 +244,8 @@
             </form>
         </div>
     </div>
-    <?= $this->include('pages/dependencias/students');?>
+    <form action="<?= base_url('/del_book'); ?>" method="post">
+        <input type="hidden" name="id_estudiante" id="retornoDelE">
+    </form>
+    <?= $this->include('pages/dependencias/students'); ?>
 </div>

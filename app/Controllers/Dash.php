@@ -45,7 +45,7 @@ class Dash extends Controller
             $student = new M_student();
             $rows_report = $student->row_preport($ci);
             if ($rows_report->getNumRows() > 0) {
-                echo 'El estudiante <strong>'.$nombre.' '.$lastname.'</strong> ya existe';
+                echo 'El estudiante <strong>' . $nombre . ' ' . $lastname . '</strong> ya existe';
             } else {
                 $student->guardar($ci, $nombre, $lastname, $direccion, $fk_municipio, $fk_carrera, $fk_year_academico, $fk_brigada);
                 echo "<strong>Datos guardados correctamente...</strong>";
@@ -83,9 +83,8 @@ class Dash extends Controller
         extract($request->getPost());
         $query1 = $student->del_student($id);
         if ($query1 != true) {
-            echo "El estudiante tiene registros pendientes";
-        } else
-            echo "El estudiante ha sido eliminado exitosamente";
+            echo "false";
+        } else echo "true";
     }
 
 
@@ -127,7 +126,7 @@ class Dash extends Controller
             $book = new M_book();
             $rows_report = $book->row_preport($codigo);
             if ($rows_report->getNumRows() > 0) {
-                echo 'El libro <strong>'.$titulo.'</strong> ya existe';
+                echo 'El libro <strong>' . $titulo . '</strong> ya existe';
             } else {
                 $book->guardar($codigo, $titulo, $precio, $autor, $isbn, $cantidad);
                 echo "<strong>Datos guardados correctamente...</strong>";
@@ -183,9 +182,9 @@ class Dash extends Controller
         $query1 = $book->del_book($id_libro);
         if ($query1 != true) {
             echo "false";
-        }else echo "true";
-        
-        
+        } else echo "true";
+
+
         /*if ($query1 != true) {
             echo "El libro tiene registros pendientes";
         } else
@@ -196,8 +195,8 @@ class Dash extends Controller
     {
         $estudiante = new M_student();
         $student = $estudiante->orderBy('id', 'DESC')->findAll();
-        foreach ($student as $std) : 
-        echo '<option value="'.$std['id'].'">'.$std['ci'].'</option>';
-        endforeach; 
+        foreach ($student as $std) :
+            echo '<option value="' . $std['id'] . '">' . $std['ci'] . '</option>';
+        endforeach;
     }
 }

@@ -89,28 +89,46 @@
 
             $(".del-student").on("click", function() {
                 var id = data.id;
+                borrarEstudiante(id);
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: 'Seguro?',
+                    text: "Se borraran todos los datos del registro!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Si, borrar!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        borrarEstudiante(id);
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        );
-                        table.ajax.reload();
-                        console.log('eliminado');
+                        var eborrado = document.getElementById("retornoDelE").value;
+                        if (eborrado != "false") {
+                            deletTrue();
+                        } else {
+                            deletFalse();
+                        }
                     }
                 })
-                console.log(id);
             });
+
+            function deletTrue() {
+                document.getElementById("retornoDelE").value = "";
+                Swal.fire(
+                    'Borrado!',
+                    'Se completo el borrado del registro.',
+                    'success'
+                );
+                table.ajax.reload();
+            }
+
+            function deletFalse() {
+                document.getElementById("retornoDelE").value = "";
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'El registro tiene dependencias!'
+                });
+                table.ajax.reload();
+            }
 
             function borrarEstudiante(id) {
                 console.log("funcion");
@@ -119,6 +137,13 @@
                     type: 'POST',
                     data: {
                         id: id
+                    },
+                    complete: function(data) {
+                        //return JSON.stringify(data.responseText);
+                        //var respuesta = JSON.stringify(data.responseText);                        
+                        var response = JSON.parse(data.responseText);
+                        $('#retornoDelE').val(response);
+                        //alert(JSON.parse(data.responseText));              
                     }
                 });
             }
