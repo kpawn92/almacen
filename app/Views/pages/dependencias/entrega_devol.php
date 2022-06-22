@@ -63,30 +63,21 @@
                         ci: ci
                     }
                 },
-                columns: [{
-                        "data": "codigo"
-                    },
+                columns: [
                     {
-                        "data": "titulo"
-                    },
-                    {
-                        "data": "isbn"
-                    },
-                    {
-                        "data": "fecha_entrega"
-                    },
-                    {
-                        "data": "fecha_dev"
-                    },
-                    {
-                        "defaultContent": `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="dripicons-document-edit"></i></button>
+                        "defaultContent": `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="uil-calendar-slash"></i></button>
                                        <button type="button" class="del-book btn btn-danger"><i class="dripicons-trash"></i></button>`
-                    }
+                    },
+                    {"data": "codigo"},
+                    {"data": "titulo"},
+                    {"data": "fecha_entrega"},
+                    {"data": "fecha_dev"}
                 ],
                 "language": {
                     "url": "assets/json/Spanish.json"
                 },
-            });
+            }).search("php").draw();
+
 
             btnClose.addEventListener("click", function() {
                 tableEntregados.destroy();

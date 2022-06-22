@@ -40,7 +40,7 @@
         <div class="row" id="content-entrega">
             <div class="col-md-3 col-lg-3 col-sm-12" id="form-entrega" style="display: none;">
                 <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
-                    <h4 class="header-title">Formulario</h4>
+                    <h4 class="header-title">Pr&eacute;stamo</h4>
                     <div class="row">
                         <div class="col-12">
                             <div class="alert alert-primary" role="alert" id="alert-entrega" style="display: none">
@@ -84,12 +84,11 @@
                         <table id="prestamosBook" class="table dt-responsive nowrap w-100">
                             <thead>
                                 <tr>
+                                    <th>Accion</th>
                                     <th>Codigo</th>
                                     <th>T&iacute;tulo</th>
-                                    <th>ISBN</th>
-                                    <th>Fecha de entrega</th>
-                                    <th>Fecha devoluci&oacute;n</th>
-                                    <th>Accion</th>
+                                    <th>F/ entrega</th>
+                                    <th>F/ devoluci&oacute;n</th>
                                 </tr>
                             </thead>
                             <tbody>

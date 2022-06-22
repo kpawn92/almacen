@@ -32,7 +32,7 @@ class M_entrega extends Model
     function list_bookEntregados($id_estudiante)
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT op_historial_libroestudiante.id, tb_libro.codigo, tb_libro.titulo, tb_libro.isbn, FROM_UNIXTIME(date_entrega,'%m-%d-%Y') as fecha_entrega, FROM_UNIXTIME(date_devol,'%m-%d-%Y')as fecha_dev FROM op_historial_libroestudiante JOIN tb_libro ON tb_libro.id = fk_libro WHERE fk_estudiante = '$id_estudiante'");
+        $query = $db->query("SELECT op_historial_libroestudiante.id, tb_libro.codigo, tb_libro.titulo, FROM_UNIXTIME(date_entrega,'%m-%d-%Y') as fecha_entrega, FROM_UNIXTIME(date_devol,'%m-%d-%Y')as fecha_dev FROM op_historial_libroestudiante JOIN tb_libro ON tb_libro.id = fk_libro WHERE fk_estudiante = '$id_estudiante'");
         return $query->getResultArray();       
     }
     
