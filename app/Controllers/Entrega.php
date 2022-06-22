@@ -12,7 +12,7 @@ class Entrega extends Controller
 {
     public function list_entrega()
     {
-        $id_estudiante = $_POST['f'];
+        $id_estudiante = $_POST['ci'];
         $librosEntregados = new M_entrega();
 
         $json = array();

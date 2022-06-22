@@ -52,7 +52,7 @@
                         <form action="" id="form4">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="idEstudiante" name="fk_estudiante">
+                                    <input type="hidden" class="form-control" id="idEstudiante" name="fk_estudiante">
                                     <div class="mb-3">
                                         <label class="form-label" for="idLibro">Libro <code>(c&oacute;digo|t&iacute;tulo)</code>:</label>
                                         <select class="form-control select2" data-toggle="select2" id="idLibro" name="fk_libro">
@@ -64,15 +64,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <button class="btn btn-warning" type="button" id="sub-entrega">Enviar form</button>
+                        </form>
                     </div>
-                    <button class="btn btn-warning" type="button" id="sub-entrega">Enviar form</button>
-                    </form>
                 </div>
             </div>
             <div class="col-md-9 col-lg-9 col-sm-12" id="dataTable-entrega" style="display: none;">
                 <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
                     <div class="row">
-                        <h4 class="header-title">Libros pendientes<button class="btn btn-primary ms-2" id="btn-update-entrega"><i class="mdi mdi-autorenew"></i></button></h4>
+                        <h4 class="header-title">Libros pendientes</h4>
                     </div>
                     <p class="text-muted font-13">Lorem ipsum <code>{Breve descripcion del DataTable}</code> dolor sit amet
                         consectetur adipisicing elit. Atque iusto cum, vel cupiditate quaerat modi quis porro dolores est
@@ -100,153 +100,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function() {
-
-            document.getElementById("sub-entrega").addEventListener("click", function() {
-                //console.log($('#form4').serialize());
-                $.ajax({
-                        url: '<?php echo base_url('/save_entrega'); ?>',
-                        type: 'POST',
-                        data: $('#form4').serialize(),
-                    })
-                    .done(function(res) {
-                        $('#resp-entrega').html(res);
-                        var cajaAlert = document.getElementById('alert-entrega');
-                        cajaAlert.style.display = '';
-                        $("#alert-entrega").show();
-                        setTimeout(function() {
-                            $("#alert-entrega").hide();
-                        }, 6000);
-                    })
-            });
-            var divEntrega = document.getElementById("select-entrega");
-            var divDttEntrega = document.getElementById("dataTable-entrega");
-            var divFormEntrega = document.getElementById("form-entrega");
-            var btnSearch = document.getElementById("btn-upBuscar");
-            var btnClose = document.getElementById("close-form");
-            var divContentEntrega = document.getElementById("content-entrega");
-            //console.log(divEntrega.style.display);
-
-            $("#btn-upEntrega").click(function() {
-                divEntrega.style.display = "";
-                btnSearch.style.display = "";
-
-                //divDttEntrega.style.display = "";
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url('/ci') ?>',
-                    success: function(response) {
-                        $("#selectCI").html(response).fadeIn();
-                    }
-                })
-            });
-            /*setInterval(function() {
-                $.ajax({
-                    type: 'POST',
-                    url: '<? //echo base_url('/ci'); 
-                            ?>',
-                    success: function(response) {
-                        $("#selectCI").html(response).fadeIn();
-                    }
-                })
-            }, 2000);*/
-            document.getElementById("btn-upBuscar").addEventListener("click", setPrestamo);
-
-            function setPrestamo() {
-                divContentEntrega.style.display = "";
-                divFormEntrega.style.display = "";
-                btnClose.style.display = "";
-                var idStudent = document.getElementById("selectCI").value;
-                var inputStudent = document.getElementById("idEstudiante").value = idStudent;
-
-                var selectorCI = document.getElementById('selectCI');
-
-                // ✅ Set the disabled attribute
-                selectorCI.setAttribute('disabled', '');
-                document.getElementById("btn-upEntrega").setAttribute('disabled', '');
-                //document.getElementById("btn-upBuscar").setAttribute('disabled', '');
-
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url('/books') ?>',
-                    success: function(res) {
-                        $("#idLibro").html(res).fadeIn();
-                    }
-                });
-
-                /* Ajax tabla de libros prestados */
-                const f = selectorCI.value;
-
-                var tableEntregados = $('#prestamosBook').DataTable({
-                    ajax: {
-                        "url": "<?= base_url('/list_entrega'); ?>",
-                        "method": "POST",
-                        "data": {
-                            f: f
-                        }
-                    },
-                    columns: [{
-                            "data": "codigo"
-                        },
-                        {
-                            "data": "titulo"
-                        },
-                        {
-                            "data": "isbn"
-                        },
-                        {
-                            "data": "fecha_entrega"
-                        },
-                        {
-                            "data": "fecha_dev"
-                        },
-                        {
-                            "defaultContent": `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="dripicons-document-edit"></i></button>
-                                       <button type="button" class="del-book btn btn-danger"><i class="dripicons-trash"></i></button>`
-                        }
-                    ],
-                    "language": {
-                        "url": "assets/json/Spanish.json"
-                    },
-                });
-                document.getElementById("dataTable-entrega").style.display = "";
-
-                document.getElementById("btn-update-entrega").addEventListener("click", function() {                  
-                    closeDiv();
-                    setPrestamo();
-                    console.log(f);
-                });
-                //console.log(idStudent);
-                btnClose.addEventListener("click", closeDiv);
-                function closeDiv() {
-                    tableEntregados.destroy();
-                    tableEntregados.clear().draw();
-                    //divContentEntrega.style.display = "none";
-                    btnClose.style.display = "none";
-                    // ✅ Remove the disabled attribute
-                    document.getElementById('selectCI').removeAttribute('disabled');
-                    document.getElementById("btn-upEntrega").removeAttribute('disabled');
-                    //document.getElementById("btn-upBuscar").removeAttribute('disabled');
-                    /*document.getElementById("idEstudiante").value = "";
-                    console.log(document.getElementById("idEstudiante").value);*/                   
-
-                };
-            }
-
-
-            /*btnClose.addEventListener("click", closeDiv);
-            function closeDiv() {
-                tableEntregados.destroy();
-                divContentEntrega.style.display = "none";
-                btnClose.style.display = "none";
-                // ✅ Remove the disabled attribute
-                document.getElementById('selectCI').removeAttribute('disabled');
-                document.getElementById("btn-upEntrega").removeAttribute('disabled');
-                document.getElementById("btn-upBuscar").removeAttribute('disabled');
-            }*/
-
-        });
-    </script>
+    <?= $this->include('pages/dependencias/entrega_devol'); ?>    
 </div>

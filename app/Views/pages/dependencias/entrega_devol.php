@@ -1,28 +1,28 @@
 <script>
     $(document).ready(function() {
+        /* Buttons */
+        const btnloadCI = document.getElementById("btn-upEntrega");
+        const btnSearch = document.getElementById("btn-upBuscar");
+        const btnClose = document.getElementById("close-form");
+        const btnFormEntrega = document.getElementById("sub-entrega");
+        const updateTbEntrega = document.getElementById("btn-update-entrega");
 
-        /* Botones */
-        var btnCI = document.getElementById("btn-upEntrega");
-        var btnSearch = document.getElementById("btn-upBuscar");
-        var btnClose = document.getElementById("close-form");
+        /* Divs */
+        let divSelectEntrega = document.getElementById("select-entrega");
+        let divContentEntrega = document.getElementById("content-entrega");
+        let divFormEntrega = document.getElementById("form-entrega");
+        let divDttEntrega = document.getElementById("dataTable-entrega");
 
-        /* Content */
-        var divSelectCI = document.getElementById("select-entrega");
-        var divContentEntrega = document.getElementById("content-entrega");
-        var divFormEntrega = document.getElementById("form-entrega");
-        var divDttEntrega = document.getElementById("dataTable-entrega");
-        var selectCI = document.getElementById("selectCI");
+        /* Tags */
+        let selectCI = document.getElementById("selectCI");
+        let idStudent = document.getElementById("idEstudiante");
+        let idBook = document.getElementById("idLibro");
 
-        var idEstudiante = document.getElementById("idEstudiante");
-        var submitEntrega = document.getElementById("sub-entrega");
-        var updateTabla = document.getElementById("btn-update-entrega");
-
-        btnCI.addEventListener("click", function() {
+        btnloadCI.addEventListener("click", function() {
             btnSearch.style.display = "";
-            divSelectCI.style.display = "";
+            divSelectEntrega.style.display = "";
 
-
-            /* Pedido de CI para el selector */
+            /* Get CI */
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('/ci') ?>',
@@ -32,16 +32,8 @@
             });
         });
 
-        /* Busqueda para mostrar el contenido del estudiante seleccionado */
         btnSearch.addEventListener("click", function() {
-            btnClose.style.display = "";
-            btnCI.setAttribute('disabled', '');
-            btnSearch.setAttribute('disabled', '');
-            selectCI.setAttribute('disabled', '');
-            idEstudiante.value = selectCI.value;
-            idEstudiante.style.display = "";
-
-            /* Mostrar los libros en el selector del form*/
+            divContentEntrega.style.display = "";
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('/books') ?>',
@@ -50,15 +42,23 @@
                 }
             });
 
-            var f = idEstudiante.value;
+            btnloadCI.setAttribute('disabled', '');
+            //btnSearch.setAttribute('disabled', '');
+            //selectCI.setAttribute('disabled', '');
+            btnClose.style.display = "";
+            divFormEntrega.style.display = "";
+            divDttEntrega.style.display = "";
+            let ci = selectCI.value;
+            idStudent.value = ci
+            console.log(ci);
+            
 
-
-            var tableEntregados = $('#prestamosBook').DataTable({
+            let tableEntregados = $('#prestamosBook').DataTable({
                 ajax: {
                     "url": "<?= base_url('/list_entrega'); ?>",
                     "method": "POST",
                     "data": {
-                        f: f
+                        ci: ci
                     }
                 },
                 columns: [{
@@ -86,18 +86,21 @@
                 },
             });
 
-            divFormEntrega.style.display = "";
-            divContentEntrega.style.display = "";
-            divDttEntrega.style.display = "";
-        });
-        /* Actualizar la Tabla */
-        updateTabla.addEventListener("click", function() {
-            tableEntregados.ajax.reload();
-            console.log(selectCI.value);
+            btnClose.addEventListener("click", function() {
+                tableEntregados.destroy();
+                tableEntregados.clear().draw();
+                //selectCI.removeAttribute('disabled');
+                //btnSearch.removeAttribute('disabled');
+                btnloadCI.removeAttribute('disabled');
+                btnClose.style.display = "none";
+                divContentEntrega.style.display = "none";
+
+            });
+            
+
         });
 
-        /* Form send */
-        submitEntrega.addEventListener("click", function() {
+        btnFormEntrega.addEventListener("click", function() {
             $.ajax({
                     url: '<?php echo base_url('/save_entrega'); ?>',
                     type: 'POST',
@@ -111,19 +114,9 @@
                     setTimeout(function() {
                         $("#alert-entrega").hide();
                     }, 6000);
-                });
-        });
+                })
+        })
 
-        /* Cerrar el contenido y destruir la tabla */
-        btnClose.addEventListener("click", function() {
-            divContentEntrega.style.display = "none";
-            tableEntregados.clear().draw();
-            tableEntregados.destroy();
-            btnClose.style.display = "none";
-            btnCI.removeAttribute('disabled');
-            btnSearch.removeAttribute('disabled');
-            selectCI.removeAttribute('disabled');
-            // console.log(tableEntregados.clear().draw());
-        });
+
     })
 </script>
