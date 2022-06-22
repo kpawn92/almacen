@@ -24,8 +24,9 @@
             accusamus deleniti cum placeat sapiente blanditiis dolorum expedita enim repellendus perspiciatis
             quasi quae. Quia, accusamus commodi?</p>
         <h4 class="page-title">
-            <button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="mdi mdi-autorenew"></i> Cargar CI</button>
+            <button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="uil-file-search-alt"></i> Cargar CI</button>
             <button class="btn btn-primary ms-2" id="btn-upBuscar" style="display: none;"><i class="uil-search-alt"></i> Buscar</button>
+            <button class="btn btn-primary ms-2" id="btn-update-entrega" style="display: none;"><i class="mdi mdi-autorenew"></i> Actualizar</button>
             <button type="button" class="btn btn-dark ms-2" id="close-form" style="display: none;"><i class="mdi mdi-window-close"></i> Deseleccionar</button>
         </h4>
 

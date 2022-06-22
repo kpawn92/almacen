@@ -32,7 +32,7 @@
             });
         });
 
-        btnSearch.addEventListener("click", function() {
+        btnSearch.addEventListener("click", function entrega() {
             divContentEntrega.style.display = "";
             $.ajax({
                 type: 'POST',
@@ -44,14 +44,16 @@
 
             btnloadCI.setAttribute('disabled', '');
             //btnSearch.setAttribute('disabled', '');
-            //selectCI.setAttribute('disabled', '');
+            selectCI.setAttribute('disabled', '');
+            updateTbEntrega.style = "";
+            btnSearch.style.display = "none";
             btnClose.style.display = "";
             divFormEntrega.style.display = "";
             divDttEntrega.style.display = "";
-            let ci = selectCI.value;
+            ci = selectCI.value;
             idStudent.value = ci
             console.log(ci);
-            
+
 
             let tableEntregados = $('#prestamosBook').DataTable({
                 ajax: {
@@ -89,14 +91,26 @@
             btnClose.addEventListener("click", function() {
                 tableEntregados.destroy();
                 tableEntregados.clear().draw();
-                //selectCI.removeAttribute('disabled');
-                //btnSearch.removeAttribute('disabled');
+                selectCI.removeAttribute('disabled');
+                btnSearch.style.display = "";
                 btnloadCI.removeAttribute('disabled');
                 btnClose.style.display = "none";
                 divContentEntrega.style.display = "none";
+                updateTbEntrega.style.display = "none";
 
             });
-            
+
+            updateTbEntrega.addEventListener("click", function() {
+                tableEntregados.destroy();
+                tableEntregados.clear().draw();                
+                for (const key in ci) {
+                    delete ci[key];
+                }
+
+                console.log(ci);
+                entrega();
+            })
+
 
         });
 
@@ -115,7 +129,7 @@
                         $("#alert-entrega").hide();
                     }, 6000);
                 })
-        })
+        });
 
 
     })
