@@ -3,8 +3,6 @@ Gestionar los estudiantes matriculados, libros existentes, prestamos de libros y
 
 
 Tarea:
-En entrega, despues de darle click al buscar, listar todos los libros pendientes y en search del datatable mostrar
-algo relacionado con el ci seleccionado (asi se eliminan el input que recibe el id del estudiante) la tabla puede 
-ejecutarse automaticamente con el setTimeout(), el dtt no necesitara un id para getQuery.
-
-.search("php").draw();
+Establecer tres buttons, cargar los ci, crear entrega, deseleccion
+cargar los ci: listara los estudiantes registrados
+crear entrega: mostrar los libros enyregados y el form al lado para realizar las entregas
