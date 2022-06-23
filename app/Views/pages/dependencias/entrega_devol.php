@@ -2,10 +2,10 @@
     $(document).ready(function() {
         /* Buttons */
         const btnloadCI = document.getElementById("btn-upEntrega");
-        const btnSearch = document.getElementById("btn-upBuscar");
+
+        const btnSearch = document.getElementById("btn-buscar");
         const btnClose = document.getElementById("close-form");
         const btnFormEntrega = document.getElementById("sub-entrega");
-        const updateTbEntrega = document.getElementById("btn-update-entrega");
 
         /* Divs */
         let divSelectEntrega = document.getElementById("select-entrega");
@@ -18,22 +18,23 @@
         let idStudent = document.getElementById("idEstudiante");
         let idBook = document.getElementById("idLibro");
 
-        btnloadCI.addEventListener("click", function() {
-            btnSearch.style.display = "";
-            divSelectEntrega.style.display = "";
+        divSelectEntrega.style.display = "";
 
-            /* Get CI */
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('/ci') ?>',
-                success: function(response) {
-                    $("#selectCI").html(response).fadeIn();
-                }
-            });
+        /* Get CI */
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('/ci') ?>',
+            success: function(response) {
+                $("#selectCI").html(response).fadeIn();
+            }
         });
 
-        btnSearch.addEventListener("click", function entrega() {
+        btnloadCI.addEventListener("click", function() {
+            btnSearch.style.display = "";
+
+
             divContentEntrega.style.display = "";
+
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('/books') ?>',
@@ -59,21 +60,43 @@
             dttEntrega(ci);
 
 
-
-
-
             btnClose.addEventListener("click", function() {
                 //tableEntregados.destroy();
                 //tableEntregados.clear().draw();
                 selectCI.removeAttribute('disabled');
-                btnSearch.style= "";
-                btnloadCI.removeAttribute('disabled');
-                btnClose.style.display = "none";
+                //btnSearch.style = "";
+                //btnloadCI.removeAttribute('disabled');
                 divContentEntrega.style.display = "none";
-                updateTbEntrega.style.display = "none";
+                btnloadCI.style.display = "none";
+                btnSearch.style = "";
+                btnClose.style.display = "none";
 
+                ci = null;
+                console.log(ci);
             });
         });
+
+        btnSearch.addEventListener("click", function() {
+            selectCI.setAttribute('disabled', '');
+            ci = selectCI.value;
+            divContentEntrega.style = "";
+
+            //let printCI = $('#dataTable-entrega input[type=search]');
+
+
+
+
+ 
+            let printCI = $('#dataTable-entrega input[type=search]').prop({
+                'value': ci
+            }).keyup(); 
+
+            btnClose.style = "";
+            //console.log(ci);
+
+        })
+
+        /* btnSearch.addEventListener("click", function entrega() {}); */
 
         btnFormEntrega.addEventListener("click", function() {
             $.ajax({
@@ -126,8 +149,7 @@
                     "url": "assets/json/Spanish.json"
                 },
             }).search(ci).draw();
+
         }
-
-
     })
 </script>
