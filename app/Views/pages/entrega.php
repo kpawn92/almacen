@@ -85,6 +85,7 @@
                             <thead>
                                 <tr>
                                     <th>Accion</th>
+                                    <th>CI</th>
                                     <th>Codigo</th>
                                     <th>T&iacute;tulo</th>
                                     <th>F/ entrega</th>

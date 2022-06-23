@@ -12,19 +12,21 @@ class Entrega extends Controller
 {
     public function list_entrega()
     {
-        $id_estudiante = $_POST['ci'];
-        $librosEntregados = new M_entrega();
+        //$id_estudiante = $_POST['ci'];
+        if ($_POST['f'] == "listarEntegados") {
+            $librosEntregado = new M_entrega();
 
-        $json = array();
-        $books = $librosEntregados->list_bookEntregados($id_estudiante);
+            $json = array();
+            $books = $librosEntregado->list_bookEntregados();
 
-        //print_r($books);
+            //print_r($books);
 
-        foreach ($books as $data) {
-            $json['data'][] = $data;
+            foreach ($books as $data) {
+                $json['data'][] = $data;
+            }
+            $jsonstring = json_encode($json);
+            echo $jsonstring;
         }
-        $jsonstring = json_encode($json);
-        echo $jsonstring;
     }
 
     public function book()

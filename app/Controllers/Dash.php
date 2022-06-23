@@ -196,7 +196,9 @@ class Dash extends Controller
         $estudiante = new M_student();
         $student = $estudiante->orderBy('id', 'DESC')->findAll();
         foreach ($student as $std) :
-            echo '<option value="' . $std['id'] . '">' . $std['ci'] . '</option>';
+            /* 
+            echo '<option value="' . $std['id'] . '">' . $std['ci'] . '</option>'; */
+            echo '<option>' . $std['ci'] . '</option>';
         endforeach;
     }
 }

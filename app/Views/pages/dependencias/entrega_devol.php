@@ -45,64 +45,34 @@
             btnloadCI.setAttribute('disabled', '');
             //btnSearch.setAttribute('disabled', '');
             selectCI.setAttribute('disabled', '');
-            updateTbEntrega.style = "";
+            //updateTbEntrega.style = "";
             btnSearch.style.display = "none";
             btnClose.style.display = "";
-            divFormEntrega.style.display = "";
-            divDttEntrega.style.display = "";
-            ci = selectCI.value;
+            divFormEntrega.style = "";
+            divDttEntrega.style = "";
+            /* ci = selectCI.value;
             idStudent.value = ci
-            console.log(ci);
+            console.log(ci); */
+
+            let ci = selectCI.value;
+
+            dttEntrega(ci);
 
 
-            let tableEntregados = $('#prestamosBook').DataTable({
-                ajax: {
-                    "url": "<?= base_url('/list_entrega'); ?>",
-                    "method": "POST",
-                    "data": {
-                        ci: ci
-                    }
-                },
-                columns: [
-                    {
-                        "defaultContent": `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="uil-calendar-slash"></i></button>
-                                       <button type="button" class="del-book btn btn-danger"><i class="dripicons-trash"></i></button>`
-                    },
-                    {"data": "codigo"},
-                    {"data": "titulo"},
-                    {"data": "fecha_entrega"},
-                    {"data": "fecha_dev"}
-                ],
-                "language": {
-                    "url": "assets/json/Spanish.json"
-                },
-            }).search("php").draw();
+
 
 
             btnClose.addEventListener("click", function() {
-                tableEntregados.destroy();
-                tableEntregados.clear().draw();
+                //tableEntregados.destroy();
+                //tableEntregados.clear().draw();
                 selectCI.removeAttribute('disabled');
-                btnSearch.style.display = "";
+                btnSearch.style= "";
                 btnloadCI.removeAttribute('disabled');
                 btnClose.style.display = "none";
                 divContentEntrega.style.display = "none";
                 updateTbEntrega.style.display = "none";
 
             });
-
-            updateTbEntrega.addEventListener("click", function() {
-                tableEntregados.destroy();
-                tableEntregados.clear().draw();                
-                for (const key in ci) {
-                    delete ci[key];
-                }
-
-                console.log(ci);
-                entrega();
-            })
-
-
         });
 
         btnFormEntrega.addEventListener("click", function() {
@@ -121,6 +91,42 @@
                     }, 6000);
                 })
         });
+
+        function dttEntrega(ci) {
+            let f = "listarEntegados"
+            let tableEntregados = $('#prestamosBook').DataTable({
+                ajax: {
+                    "url": "<?= base_url('/list_entrega'); ?>",
+                    "method": "POST",
+                    "data": {
+                        f: f
+                    }
+                },
+                columns: [{
+                        "defaultContent": `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="uil-calendar-slash"></i></button>
+                                       <button type="button" class="del-book btn btn-danger"><i class="dripicons-trash"></i></button>`
+                    },
+                    {
+                        "data": "ci"
+                    },
+                    {
+                        "data": "codigo"
+                    },
+                    {
+                        "data": "titulo"
+                    },
+                    {
+                        "data": "fecha_entrega"
+                    },
+                    {
+                        "data": "fecha_dev"
+                    }
+                ],
+                "language": {
+                    "url": "assets/json/Spanish.json"
+                },
+            }).search(ci).draw();
+        }
 
 
     })

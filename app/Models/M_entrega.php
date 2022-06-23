@@ -29,11 +29,10 @@ class M_entrega extends Model
         ];
         return $builder->insert($data);
     }
-    function list_bookEntregados($id_estudiante)
+    function list_bookEntregados()
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT op_historial_libroestudiante.id, tb_libro.codigo, tb_libro.titulo, FROM_UNIXTIME(date_entrega,'%m-%d-%Y') as fecha_entrega, FROM_UNIXTIME(date_devol,'%m-%d-%Y')as fecha_dev FROM op_historial_libroestudiante JOIN tb_libro ON tb_libro.id = fk_libro WHERE fk_estudiante = '$id_estudiante'");
-        return $query->getResultArray();       
+        $query = $db->query("SELECT op_historial_libroestudiante.id, ci, tb_libro.codigo, tb_libro.titulo, FROM_UNIXTIME(date_entrega,'%m-%d-%Y') as fecha_entrega, FROM_UNIXTIME(date_devol,'%m-%d-%Y')as fecha_dev FROM op_historial_libroestudiante JOIN tb_libro ON tb_libro.id = fk_libro JOIN tb_estudiante ON tb_estudiante.id = op_historial_libroestudiante.fk_estudiante");
+        return $query->getResultArray();
     }
-    
 }
