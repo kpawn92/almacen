@@ -1,0 +1,2 @@
+ERROR - 2022-06-23 13:28:52 --> Cannot add or update a child row: a foreign key constraint fails (`db_almacen`.`op_historial_libroestudiante`, CONSTRAINT `fk_op_historial_libroestudiante_tb_estudiante_1` FOREIGN KEY (`fk_estudiante`) REFERENCES `tb_estudiante` (`id`))
+ERROR - 2022-06-23 13:38:01 --> Cannot add or update a child row: a foreign key constraint fails (`db_almacen`.`op_historial_libroestudiante`, CONSTRAINT `fk_op_historial_libroestudiante_tb_estudiante_1` FOREIGN KEY (`fk_estudiante`) REFERENCES `tb_estudiante` (`id`))

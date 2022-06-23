@@ -52,8 +52,8 @@
             divFormEntrega.style = "";
             divDttEntrega.style = "";
             /* ci = selectCI.value;
-            idStudent.value = ci
             console.log(ci); */
+            idStudent.value = selectCI.value
 
             let ci = selectCI.value;
 
@@ -78,22 +78,13 @@
 
         btnSearch.addEventListener("click", function() {
             selectCI.setAttribute('disabled', '');
+            idStudent.value = selectCI.value
             ci = selectCI.value;
             divContentEntrega.style = "";
-
-            //let printCI = $('#dataTable-entrega input[type=search]');
-
-
-
-
- 
-            let printCI = $('#dataTable-entrega input[type=search]').prop({
+            $('#dataTable-entrega input[type=search]').prop({
                 'value': ci
-            }).keyup(); 
-
+            }).keyup();
             btnClose.style = "";
-            //console.log(ci);
-
         })
 
         /* btnSearch.addEventListener("click", function entrega() {}); */

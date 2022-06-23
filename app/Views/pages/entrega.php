@@ -52,7 +52,7 @@
                         <form action="" id="form4">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="hidden" class="form-control" id="idEstudiante" name="fk_estudiante">
+                                    <input type="text" class="form-control" id="idEstudiante" name="fk_estudiante">
                                     <div class="mb-3">
                                         <label class="form-label" for="idLibro">Libro <code>(c&oacute;digo|t&iacute;tulo)</code>:</label>
                                         <select class="form-control select2" data-toggle="select2" id="idLibro" name="fk_libro">

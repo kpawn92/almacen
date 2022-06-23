@@ -40,14 +40,7 @@
                 })
             });
             /*setInterval(function() {
-                $.ajax({
-                    type: 'POST',
-                    url: '<? //echo base_url('/ci'); 
-                            ?>',
-                    success: function(response) {
-                        $("#selectCI").html(response).fadeIn();
-                    }
-                })
+                
             }, 2000);*/
             document.getElementById("btn-upBuscar").addEventListener("click", setPrestamo);
 
