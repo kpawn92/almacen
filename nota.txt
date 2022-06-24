@@ -3,6 +3,5 @@ Gestionar los estudiantes matriculados, libros existentes, prestamos de libros y
 
 
 Tarea:
-Establecer tres buttons, cargar los ci, crear entrega, deseleccion
-cargar los ci: listara los estudiantes registrados
-crear entrega: mostrar los libros enyregados y el form al lado para realizar las entregas
+Para la devolucion de books, crear un form con select multiple devol[], en el controller pasar: (arrar(idLibros), idSt, dateDevol) en un forEach que ejecute las 
+consultas SQL: update historialLS set date_devol=dateDevol where fk_estudiante=idSt and fk_libro=idLibros;
