@@ -24,8 +24,9 @@
             accusamus deleniti cum placeat sapiente blanditiis dolorum expedita enim repellendus perspiciatis
             quasi quae. Quia, accusamus commodi?</p>
         <h4 class="page-title">
-            <button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="uil-file-search-alt"></i> Cargar CI</button>
-            <button type="button" class="btn btn-dark ms-2" id="close-form" style="display: none;"><i class="mdi mdi-window-close"></i> Deseleccionar</button>
+            <button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="uil-file-search-alt"></i> Generar reporte</button>
+            <button class="btn btn-dark ms-2" id="btn-listCI"><i class=" uil-users-alt "></i>+</button>
+            <button type="button" class="btn btn-dark ms-2" id="close-form" style="display: none;"><i class="mdi mdi-window-close"></i> Close</button>
         </h4>
 
         <div class="mb-3 col-md-3 col-sm-12" style="display: none;" id="select-entrega">
@@ -51,7 +52,7 @@
                         <form action="" id="form4">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="idEstudiante" name="fk_estudiante">
+                                    <input type="hidden" class="form-control" id="idEstudiante" name="fk_estudiante">
                                     <div class="mb-3">
                                         <label class="form-label" for="idLibro">Libro <code>(c&oacute;digo|t&iacute;tulo)</code>:</label>
                                         <select class="form-control select2" data-toggle="select2" id="idLibro" name="fk_libro">

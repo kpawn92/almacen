@@ -2,6 +2,7 @@
     $(document).ready(function() {
         /* Buttons */
         const btnloadCI = document.getElementById("btn-upEntrega");
+        const btnListCI = document.getElementById("btn-listCI");
         const btnClose = document.getElementById("close-form");
         const btnFormEntrega = document.getElementById("sub-entrega");
 
@@ -18,14 +19,25 @@
 
         divSelectEntrega.style.display = "";
 
-        /* Get CI */
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo base_url('/ci') ?>',
-            success: function(response) {
-                $("#selectCI").html(response).fadeIn();
-            }
+        identidades();
+
+        document.getElementById("btn-listCI").addEventListener("click", function() {
+            identidades();
         });
+        /* $('element').one('mouseover', function() {
+            identidades();
+        }); */
+
+        /* Get CI */
+        function identidades() {
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('/ci') ?>',
+                success: function(response) {
+                    $("#selectCI").html(response).fadeIn();
+                }
+            });
+        }
 
         /* table Entregas */
         let f = "listarEntegados"
@@ -38,7 +50,7 @@
                 }
             },
             columns: [{
-                    "defaultContent": `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="uil-calendar-slash"></i></button>
+                    "defaultContent": `<button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="uil-calendar-slash"></i></button>
                                        <button type="button" class="del-book btn btn-danger"><i class="dripicons-trash"></i></button>`
                 },
                 {
@@ -65,7 +77,8 @@
         btnloadCI.addEventListener("click", function() {
 
             divContentEntrega.style.display = "";
-
+            btnListCI.style.display = "none";
+            
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('/books') ?>',
@@ -95,8 +108,10 @@
             $.ajax({
                 url: '<?php echo base_url('/id_ci') ?>',
                 type: 'POST',
-                data: {ci:ci}
-            }).done(function (respuest) {
+                data: {
+                    ci: ci
+                }
+            }).done(function(respuest) {
                 $('#idEstudiante').val(respuest);
             });
 
@@ -109,6 +124,7 @@
                 divContentEntrega.style.display = "none";
                 btnloadCI.style = "";
                 btnClose.style.display = "none";
+                btnListCI.style = "";
 
                 ci = null;
                 console.log(ci);
