@@ -53,6 +53,7 @@ $routes->post('ci', 'Dash::ci');
 $routes->post('books', 'Entrega::book');
 $routes->post('list_entrega', 'Entrega::list_entrega');
 $routes->post('save_entrega', 'Entrega::save_entrega');
+$routes->post('id_ci', 'Entrega::id_ci');
 
 
 /*

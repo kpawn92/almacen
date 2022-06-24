@@ -64,4 +64,11 @@ class M_student extends Model{
         $query = $db->query("SELECT tb_estudiante.id, nombre, lastname, ci, direccion, municipio, carrera, anno_academico, brigada FROM tb_estudiante JOIN tb_municipio ON tb_municipio.id = tb_estudiante.fk_municipio JOIN tb_carrera ON tb_carrera.id = tb_estudiante.fk_carrera JOIN tb_year_academico ON tb_year_academico.id = tb_estudiante.fk_year_academico JOIN tb_brigada ON tb_brigada.id = tb_estudiante.fk_brigada ORDER BY tb_estudiante.id DESC");
         return $query->getResultArray();
     }
+
+    function id_ci($ci)
+    {
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT id FROM tb_estudiante WHERE ci = '$ci'");
+        return $query->getRowArray();
+    }
 }

@@ -66,4 +66,16 @@ class Entrega extends Controller
             }
         }
     }
+
+    public function id_ci()
+    {
+        $student = new M_student();
+        $request = \Config\Services::request();
+        
+        extract($request->getPost());
+
+        $idCI = $student->id_ci($ci);
+
+        echo $idCI['id'];
+    }
 }

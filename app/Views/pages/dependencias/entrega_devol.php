@@ -2,8 +2,6 @@
     $(document).ready(function() {
         /* Buttons */
         const btnloadCI = document.getElementById("btn-upEntrega");
-
-        const btnSearch = document.getElementById("btn-buscar");
         const btnClose = document.getElementById("close-form");
         const btnFormEntrega = document.getElementById("sub-entrega");
 
@@ -15,7 +13,7 @@
 
         /* Tags */
         let selectCI = document.getElementById("selectCI");
-        let idStudent = document.getElementById("idEstudiante");
+        //let idStudent = document.getElementById("idEstudiante");
         let idBook = document.getElementById("idLibro");
 
         divSelectEntrega.style.display = "";
@@ -29,9 +27,42 @@
             }
         });
 
-        btnloadCI.addEventListener("click", function() {
-            btnSearch.style.display = "";
+        /* table Entregas */
+        let f = "listarEntegados"
+        let tableEntregados = $('#prestamosBook').DataTable({
+            ajax: {
+                "url": "<?= base_url('/list_entrega'); ?>",
+                "method": "POST",
+                "data": {
+                    f: f
+                }
+            },
+            columns: [{
+                    "defaultContent": `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="uil-calendar-slash"></i></button>
+                                       <button type="button" class="del-book btn btn-danger"><i class="dripicons-trash"></i></button>`
+                },
+                {
+                    "data": "ci"
+                },
+                {
+                    "data": "codigo"
+                },
+                {
+                    "data": "titulo"
+                },
+                {
+                    "data": "fecha_entrega"
+                },
+                {
+                    "data": "fecha_dev"
+                }
+            ],
+            "language": {
+                "url": "assets/json/Spanish.json"
+            },
+        });
 
+        btnloadCI.addEventListener("click", function() {
 
             divContentEntrega.style.display = "";
 
@@ -44,31 +75,39 @@
             });
 
             btnloadCI.setAttribute('disabled', '');
-            //btnSearch.setAttribute('disabled', '');
             selectCI.setAttribute('disabled', '');
             //updateTbEntrega.style = "";
-            btnSearch.style.display = "none";
             btnClose.style.display = "";
             divFormEntrega.style = "";
             divDttEntrega.style = "";
             /* ci = selectCI.value;
-            console.log(ci); */
-            idStudent.value = selectCI.value
+            console.log(ci); 
+            idStudent.value = selectCI.value*/
 
             let ci = selectCI.value;
+            $('#dataTable-entrega input[type=search]').prop({
+                'value': ci
+            }).keyup();
 
-            dttEntrega(ci);
+            let ciID = ci
 
+            /* Get ID del ci seleccionado */
+            $.ajax({
+                url: '<?php echo base_url('/id_ci') ?>',
+                type: 'POST',
+                data: {ci:ci}
+            }).done(function (respuest) {
+                $('#idEstudiante').val(respuest);
+            });
 
+            /* Cerrar la orden */
             btnClose.addEventListener("click", function() {
                 //tableEntregados.destroy();
                 //tableEntregados.clear().draw();
                 selectCI.removeAttribute('disabled');
-                //btnSearch.style = "";
-                //btnloadCI.removeAttribute('disabled');
+                btnloadCI.removeAttribute('disabled');
                 divContentEntrega.style.display = "none";
-                btnloadCI.style.display = "none";
-                btnSearch.style = "";
+                btnloadCI.style = "";
                 btnClose.style.display = "none";
 
                 ci = null;
@@ -76,19 +115,7 @@
             });
         });
 
-        btnSearch.addEventListener("click", function() {
-            selectCI.setAttribute('disabled', '');
-            idStudent.value = selectCI.value
-            ci = selectCI.value;
-            divContentEntrega.style = "";
-            $('#dataTable-entrega input[type=search]').prop({
-                'value': ci
-            }).keyup();
-            btnClose.style = "";
-        })
-
-        /* btnSearch.addEventListener("click", function entrega() {}); */
-
+        /* Send form entrega */
         btnFormEntrega.addEventListener("click", function() {
             $.ajax({
                     url: '<?php echo base_url('/save_entrega'); ?>',
@@ -103,44 +130,13 @@
                     setTimeout(function() {
                         $("#alert-entrega").hide();
                     }, 6000);
-                })
+                });
+
         });
 
-        function dttEntrega(ci) {
-            let f = "listarEntegados"
-            let tableEntregados = $('#prestamosBook').DataTable({
-                ajax: {
-                    "url": "<?= base_url('/list_entrega'); ?>",
-                    "method": "POST",
-                    "data": {
-                        f: f
-                    }
-                },
-                columns: [{
-                        "defaultContent": `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="uil-calendar-slash"></i></button>
-                                       <button type="button" class="del-book btn btn-danger"><i class="dripicons-trash"></i></button>`
-                    },
-                    {
-                        "data": "ci"
-                    },
-                    {
-                        "data": "codigo"
-                    },
-                    {
-                        "data": "titulo"
-                    },
-                    {
-                        "data": "fecha_entrega"
-                    },
-                    {
-                        "data": "fecha_dev"
-                    }
-                ],
-                "language": {
-                    "url": "assets/json/Spanish.json"
-                },
-            }).search(ci).draw();
-
-        }
+        /* Autocarga de la table-entrega */
+        setInterval(function() {
+            tableEntregados.ajax.reload();
+        }, 3000);
     })
 </script>

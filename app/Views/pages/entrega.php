@@ -25,7 +25,6 @@
             quasi quae. Quia, accusamus commodi?</p>
         <h4 class="page-title">
             <button class="btn btn-warning ms-2" id="btn-upEntrega"><i class="uil-file-search-alt"></i> Cargar CI</button>
-            <button class="btn btn-warning ms-2" id="btn-buscar" style="display: none;"><i class="uil-file-search-alt"></i> Buscar</button>
             <button type="button" class="btn btn-dark ms-2" id="close-form" style="display: none;"><i class="mdi mdi-window-close"></i> Deseleccionar</button>
         </h4>
 
@@ -100,5 +99,9 @@
             </div>
         </div>
     </div>
-    <?= $this->include('pages/dependencias/entrega_devol'); ?>    
+    <!-- <form action="<?php //echo base_url('/id_ci') ?>" method="post">
+        <input type="text" value="44234234222" name="ciID">
+        <input type="submit" value="">
+    </form> -->
+    <?= $this->include('pages/dependencias/entrega_devol'); ?>
 </div>
