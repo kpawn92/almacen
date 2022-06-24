@@ -21,12 +21,9 @@
 
         identidades();
 
-        document.getElementById("btn-listCI").addEventListener("click", function() {
+        btnListCI.addEventListener("click", function() {
             identidades();
         });
-        /* $('element').one('mouseover', function() {
-            identidades();
-        }); */
 
         /* Get CI */
         function identidades() {
@@ -39,7 +36,7 @@
             });
         }
 
-        /* table Entregas */
+        /* Table entregas */
         let f = "listarEntegados"
         let tableEntregados = $('#prestamosBook').DataTable({
             ajax: {
@@ -74,11 +71,12 @@
             },
         });
 
+        /* Load content-entrega */
         btnloadCI.addEventListener("click", function() {
 
             divContentEntrega.style.display = "";
             btnListCI.style.display = "none";
-            
+
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('/books') ?>',
@@ -100,7 +98,9 @@
             let ci = selectCI.value;
             $('#dataTable-entrega input[type=search]').prop({
                 'value': ci
-            }).keyup();
+            }).keyup().hide();
+            
+            $('#prestamosBook_filter label').hide();
 
             let ciID = ci
 
