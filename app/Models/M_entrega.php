@@ -35,4 +35,11 @@ class M_entrega extends Model
         $query = $db->query("SELECT op_historial_libroestudiante.id, ci, tb_libro.codigo, tb_libro.titulo, FROM_UNIXTIME(date_entrega,'%m-%d-%Y') as fecha_entrega, FROM_UNIXTIME(date_devol,'%m-%d-%Y')as fecha_dev FROM op_historial_libroestudiante JOIN tb_libro ON tb_libro.id = fk_libro JOIN tb_estudiante ON tb_estudiante.id = op_historial_libroestudiante.fk_estudiante");
         return $query->getResultArray();
     }
+    function del_entrega($id_entrega)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('op_historial_libroestudiante');
+        $builder->where('id', $id_entrega);
+        return $builder->delete();
+    }
 }

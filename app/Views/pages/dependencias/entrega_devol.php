@@ -47,8 +47,7 @@
                 }
             },
             columns: [{
-                    "defaultContent": `<button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLibro" aria-controls="offcanvasRight"><i class="uil-calendar-slash"></i></button>
-                                       <button type="button" class="del-book btn btn-danger"><i class="dripicons-trash"></i></button>`
+                    "defaultContent": `<button type="button" class="del-entrega btn btn-danger"><i class="dripicons-trash"></i></button>`
                 },
                 {
                     "data": "ci"
@@ -99,7 +98,7 @@
             $('#dataTable-entrega input[type=search]').prop({
                 'value': ci
             }).keyup().hide();
-            
+
             $('#prestamosBook_filter label').hide();
 
             let ciID = ci
@@ -154,5 +153,42 @@
         setInterval(function() {
             tableEntregados.ajax.reload();
         }, 3000);
+
+        /* Eliminar registro */
+        $("#prestamosBook tbody").on('click', 'tr', function() {
+            let data2 = tableEntregados.row(this).data();
+
+            $(".del-entrega").on("click", function() {
+                let id_entrega = data2.id;
+                Swal.fire({
+                    title: 'Seguro?',
+                    text: "Se eliminaran todos los datos de la entrega",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, borrarlo!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        borrarEntrega(id_entrega);
+                        Swal.fire(
+                            'Borrado!',
+                            'Se completo el borrado del registro.',
+                            'success'
+                        );
+                    }
+                })
+            });
+
+            function borrarEntrega(id_entrega) {
+                $.ajax({
+                    url: '<?php echo base_url('/del_entrega'); ?>',
+                    type: 'POST',
+                    data: {
+                        id_entrega: id_entrega
+                    }
+                });
+            }
+        });
     })
 </script>

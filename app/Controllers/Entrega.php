@@ -71,11 +71,19 @@ class Entrega extends Controller
     {
         $student = new M_student();
         $request = \Config\Services::request();
-        
+
         extract($request->getPost());
 
         $idCI = $student->id_ci($ci);
 
         echo $idCI['id'];
+    }
+
+    public function del_entrega()
+    {
+        $request = \Config\Services::request();
+        $entrega = new M_entrega();
+        extract($request->getPost());
+        $entrega->del_entrega($id_entrega);
     }
 }
